@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.Random;
+import java.util.Iterator;
 
 /**
  * A class representing shared characteristics of animals.
@@ -15,12 +16,8 @@ public abstract class Animal
     private Field field;
     // The animal's position in the field.
     private Location location;
-    // A shared random number generator to control breeding.
-    private static final Random rand = Randomizer.getRandom();
     
-    private enum Gender {
-    MALE, FEMALE
-    }
+    private int gender;
     
     protected int age;
     
@@ -35,6 +32,9 @@ public abstract class Animal
         alive = true;
         this.field = field;
         setLocation(location);
+        Random rand = new Random();
+        gender = rand.nextInt(2);
+        
     }
     
     /**
@@ -116,8 +116,37 @@ public abstract class Animal
      */
     protected boolean canBreed()
     {
-        return age >= getBREEDING_AGE();
+        Field field = getField();
+        List<Location> adjacent = field.adjacentLocations(getLocation());
+        Iterator<Location> it = adjacent.iterator();
+        boolean canBreedGender = false;
+        boolean canBreedAge = false;
+        boolean returnValue = false;
+        while(it.hasNext()) {
+            Location where = it.next();
+            Object animal = field.getObjectAt(where);
+            Animal nextAnimal = (Animal) animal;
+            if(nextAnimal==null) {
+                return false;
+            }
+            if(((this.getMale() && !nextAnimal.getMale()) || (!this.getMale() && nextAnimal.getMale()))  && this.getClass().equals(animal.getClass()))
+            {
+                canBreedGender = true;
+            }
+            if(age >= getBREEDING_AGE())
+            {
+                canBreedAge = true;
+            }
+            if (canBreedAge && canBreedGender)
+            {
+            returnValue = true;
+        }   
+        }
+        return returnValue;
+        
+        
     }
+    
     protected abstract int getBREEDING_AGE();
     
     /**
@@ -128,6 +157,7 @@ public abstract class Animal
     protected int breed()
     {
         int births = 0;
+        Random rand = new Random();
         if(canBreed() && rand.nextDouble() <= getBREEDING_PROBABILITY()) {
             births = rand.nextInt(getMAX_LITTER_SIZE()) + 1;
         }
@@ -135,4 +165,35 @@ public abstract class Animal
     }
     protected abstract double getBREEDING_PROBABILITY();
     protected abstract int getMAX_LITTER_SIZE();
+    
+    protected abstract Animal getNewAnimal(boolean randomAge, Field field, Location location);
+    
+    /**
+     * Check whether or not this fox is to give birth at this step.
+     * New births will be made into free adjacent locations.
+     * @param newFoxes A list to return newly born foxes.
+     */
+    protected void giveBirth(List<Animal> newAnimals)
+    {
+        // New foxes are born into adjacent locations.
+        // Get a list of adjacent free locations.
+        Field field = getField();
+        List<Location> free = field.getFreeAdjacentLocations(getLocation());
+        int births = breed();
+        for(int b = 0; b < births && free.size() > 0; b++) {
+            Location loc = free.remove(0);
+            Animal young = getNewAnimal(false, field, loc);
+            newAnimals.add(young);
+        }
+    }
+    private boolean getMale()
+    {
+        if(gender==1)
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }

@@ -1,0 +1,20 @@
+#BlueJ class context
+comment0.target=Tiger
+comment0.text=\n\ Write\ a\ description\ of\ class\ Tiger\ here.\n\n\ @author\ (your\ name)\n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=randomAge\ field\ location
+comment1.target=Tiger(boolean,\ Field,\ Location)
+comment1.text=\n\ Create\ a\ Tiger.\ A\ Tiger\ can\ be\ created\ as\ a\ new\ born\ (age\ zero\n\ and\ not\ hungry)\ or\ with\ a\ random\ age\ and\ food\ level.\n\ \n\ @param\ randomAge\ If\ true,\ the\ Tiger\ will\ have\ random\ age\ and\ hunger\ level.\n\ @param\ field\ The\ field\ currently\ occupied.\n\ @param\ location\ The\ location\ within\ the\ field.\n
+comment2.params=
+comment2.target=int\ getMAX_AGE()
+comment3.params=
+comment3.target=int\ getBREEDING_AGE()
+comment4.params=
+comment4.target=int\ breed()
+comment4.text=\n\ Generate\ a\ number\ representing\ the\ number\ of\ births,\n\ if\ it\ can\ breed.\n\ @return\ The\ number\ of\ births\ (may\ be\ zero).\n
+comment5.params=
+comment5.target=int\ getMAX_LITTER_SIZE()
+comment6.params=
+comment6.target=double\ getBREEDING_PROBABILITY()
+comment7.params=randomAge\ field\ loc
+comment7.target=Animal\ getNewAnimal(boolean,\ Field,\ Location)
+numComments=8

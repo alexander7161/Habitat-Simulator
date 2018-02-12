@@ -1,4 +1,7 @@
 import java.util.List;
+import java.util.Iterator;
+import java.util.Random;
+
 /**
  * Abstract class Predator - write a description of the class here
  *
@@ -9,6 +12,8 @@ public abstract class Predator extends Animal
 {
     // instance variables - replace the example below with your own
     protected int foodLevel;
+    // A shared random number generator to control breeding.
+    private static final Random rand = Randomizer.getRandom();
 
     /**
      * 
@@ -25,12 +30,12 @@ public abstract class Predator extends Animal
      * @param field The field currently occupied.
      * @param newFoxes A list to return newly born foxes.
      */
-    public void act(List<Animal> newFoxes)
+    public void act(List<Animal> newPredators)
     {
         incrementAge();
         incrementHunger();
         if(isAlive()) {
-            giveBirth(newFoxes);            
+            giveBirth(newPredators);            
             // Move towards a source of food if found.
             Location newLocation = findFood();
             if(newLocation == null) { 
@@ -47,6 +52,32 @@ public abstract class Predator extends Animal
             }
         }
     }
+    
+        /**
+     * Look for rabbits adjacent to the current location.
+     * Only the first live rabbit is eaten.
+     * @return Where food was found, or null if it wasn't.
+     */
+    protected Location findFood()
+    {
+        Field field = getField();
+        List<Location> adjacent = field.adjacentLocations(getLocation());
+        Iterator<Location> it = adjacent.iterator();
+        while(it.hasNext()) {
+            Location where = it.next();
+            Object animal = field.getObjectAt(where);
+            if(animal instanceof Prey)
+            {
+                Prey prey = (Prey) animal;
+                if(prey.isAlive()) { 
+                   prey.setDead();
+                   foodLevel += prey.getFOOD_VALUE();
+                   return where;
+                }
+            }
+        }
+        return null;
+    }
 
     /**
      * Make this fox more hungry. This could result in the fox's death.
@@ -58,10 +89,6 @@ public abstract class Predator extends Animal
             setDead();
         }
     }
-    
-    protected abstract void giveBirth(List<Animal> newFoxes);
-    protected abstract Location findFood();
-    
-    
+
     
 }

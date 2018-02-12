@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=Rabbit
+comment0.text=\n\ A\ simple\ model\ of\ a\ rabbit.\n\ Rabbits\ age,\ move,\ breed,\ and\ die.\n\ \n\ @author\ David\ J.\ Barnes\ and\ Michael\ K\u00F6lling\n\ @version\ 2016.02.29\ (2)\n
+comment1.params=randomAge\ field\ location
+comment1.target=Rabbit(boolean,\ Field,\ Location)
+comment1.text=\n\ Create\ a\ new\ rabbit.\ A\ rabbit\ may\ be\ created\ with\ age\n\ zero\ (a\ new\ born)\ or\ with\ a\ random\ age.\n\ \n\ @param\ randomAge\ If\ true,\ the\ rabbit\ will\ have\ a\ random\ age.\n\ @param\ field\ The\ field\ currently\ occupied.\n\ @param\ location\ The\ location\ within\ the\ field.\n
+comment2.params=
+comment2.target=int\ getMAX_AGE()
+comment3.params=
+comment3.target=double\ getBREEDING_PROBABILITY()
+comment4.params=
+comment4.target=int\ getMAX_LITTER_SIZE()
+comment5.params=randomAge\ field\ loc
+comment5.target=Animal\ getNewAnimal(boolean,\ Field,\ Location)
+comment6.params=
+comment6.target=int\ getBREEDING_AGE()
+comment7.params=
+comment7.target=int\ getFOOD_VALUE()
+numComments=8
