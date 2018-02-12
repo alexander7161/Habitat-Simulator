@@ -159,7 +159,7 @@ public abstract class Animal
     protected int breed()
     {
         int births = 0;
-        if(canBreed() && rand.nextDouble() <= getBREEDING_PROBABILITY()) {
+        if(canBreedAge() && rand.nextDouble() <= getBREEDING_PROBABILITY()) {
             births = rand.nextInt(getMAX_LITTER_SIZE()) + 1;
         }
         return births;
@@ -178,14 +178,29 @@ public abstract class Animal
     {
         // New foxes are born into adjacent locations.
         // Get a list of adjacent free locations.
+        
         Field field = getField();
-        List<Location> free = field.getFreeAdjacentLocations(getLocation());
-        int births = breed();
-        for(int b = 0; b < births && free.size() > 0; b++) {
-            Location loc = free.remove(0);
-            Animal young = getNewAnimal(false, field, loc);
-            newAnimals.add(young);
+        List<Location> adjacent = field.adjacentLocations(getLocation());
+        Iterator<Location> it = adjacent.iterator();
+        while(it.hasNext()) {
+            Location where = it.next();
+            Object animal = field.getObjectAt(where);
+            Animal nextAnimal = (Animal) animal;
+            if(nextAnimal==null || !this.getClass().equals(nextAnimal.getClass())) {
+                return;
+            }
+            if((this.getMale() && !nextAnimal.getMale()) || (!this.getMale() && nextAnimal.getMale()))
+            {
+                List<Location> free = field.getFreeAdjacentLocations(getLocation());
+                int births = breed();
+            for(int b = 0; b < births && free.size() > 0; b++) {
+                Location loc = free.remove(0);
+                Animal young = getNewAnimal(false, field, loc);
+                newAnimals.add(young);
+            }
+            }
         }
+        
     }
     private boolean getMale()
     {
