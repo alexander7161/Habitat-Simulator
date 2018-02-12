@@ -21,6 +21,8 @@ public abstract class Animal
     
     protected int age;
     
+    private Random rand = new Random();
+    
     /**
      * Create a new animal at location in field.
      * 
@@ -32,7 +34,6 @@ public abstract class Animal
         alive = true;
         this.field = field;
         setLocation(location);
-        Random rand = new Random();
         gender = rand.nextInt(2);
         
     }
@@ -157,7 +158,6 @@ public abstract class Animal
     protected int breed()
     {
         int births = 0;
-        Random rand = new Random();
         if(canBreed() && rand.nextDouble() <= getBREEDING_PROBABILITY()) {
             births = rand.nextInt(getMAX_LITTER_SIZE()) + 1;
         }
