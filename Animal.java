@@ -114,14 +114,17 @@ public abstract class Animal
     /**
      * A fox can breed if it has reached the breeding age.
      */
-    protected boolean canBreed()
+    protected boolean canBreedAge()
+    {
+        return age >= getBREEDING_AGE();
+    }
+    
+    protected boolean canBreedGender()
     {
         Field field = getField();
         List<Location> adjacent = field.adjacentLocations(getLocation());
         Iterator<Location> it = adjacent.iterator();
         boolean canBreedGender = false;
-        boolean canBreedAge = false;
-        boolean returnValue = false;
         while(it.hasNext()) {
             Location where = it.next();
             Object animal = field.getObjectAt(where);
@@ -129,22 +132,23 @@ public abstract class Animal
             if(nextAnimal==null) {
                 return false;
             }
-            if(((this.getMale() && !nextAnimal.getMale()) || (!this.getMale() && nextAnimal.getMale()))  && this.getClass().equals(animal.getClass()))
+            if((this.getMale() && !nextAnimal.getMale()) || (!this.getMale() && nextAnimal.getMale()))
             {
                 canBreedGender = true;
             }
-            if(age >= getBREEDING_AGE())
-            {
-                canBreedAge = true;
-            }
-            if (canBreedAge && canBreedGender)
-            {
-            returnValue = true;
-        }   
         }
-        return returnValue;
-        
-        
+        return canBreedGender;
+    }
+    
+    protected boolean canBreed()
+    {
+        if(canBreedAge() && canBreedGender())
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
     
     protected abstract int getBREEDING_AGE();
@@ -158,11 +162,12 @@ public abstract class Animal
     {
         int births = 0;
         Random rand = new Random();
-        if(canBreed() && rand.nextDouble() <= getBREEDING_PROBABILITY()) {
+        if(canBreed() && (rand.nextDouble() <= getBREEDING_PROBABILITY())) {
             births = rand.nextInt(getMAX_LITTER_SIZE()) + 1;
         }
         return births;
     }
+    
     protected abstract double getBREEDING_PROBABILITY();
     protected abstract int getMAX_LITTER_SIZE();
     
@@ -186,6 +191,7 @@ public abstract class Animal
             newAnimals.add(young);
         }
     }
+    
     private boolean getMale()
     {
         if(gender==1)
