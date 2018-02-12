@@ -112,40 +112,41 @@ public abstract class Animal
     }
     protected abstract int getMAX_AGE();
     
-    /**
-     * A fox can breed if it has reached the breeding age.
-     */
-    protected boolean canBreed()
+    protected boolean canBreedAge()
+    {
+        return age >= getBREEDING_AGE();
+    }
+    
+    protected boolean canBreedGender()
     {
         Field field = getField();
         List<Location> adjacent = field.adjacentLocations(getLocation());
         Iterator<Location> it = adjacent.iterator();
         boolean canBreedGender = false;
-        boolean canBreedAge = false;
-        boolean returnValue = false;
         while(it.hasNext()) {
             Location where = it.next();
             Object animal = field.getObjectAt(where);
             Animal nextAnimal = (Animal) animal;
-            if(nextAnimal==null) {
+            if(nextAnimal==null || !this.getClass().equals(nextAnimal.getClass())) {
                 return false;
             }
-            if(((this.getMale() && !nextAnimal.getMale()) || (!this.getMale() && nextAnimal.getMale()))  && this.getClass().equals(animal.getClass()))
+            if((this.getMale() && !nextAnimal.getMale()) || (!this.getMale() && nextAnimal.getMale()))
             {
                 canBreedGender = true;
             }
-            if(age >= getBREEDING_AGE())
-            {
-                canBreedAge = true;
-            }
-            if (canBreedAge && canBreedGender)
-            {
-            returnValue = true;
-        }   
         }
-        return returnValue;
-        
-        
+        return canBreedGender;
+    }
+    
+    protected boolean canBreed()
+    {
+        if(canBreedAge() && canBreedGender())
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
     
     protected abstract int getBREEDING_AGE();
