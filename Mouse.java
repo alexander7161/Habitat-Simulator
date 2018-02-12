@@ -25,7 +25,6 @@ public class Mouse extends Prey
     /**
      * Create a new rabbit. A rabbit may be created with age
      * zero (a new born) or with a random age.
-     * 
      * @param randomAge If true, the rabbit will have a random age.
      * @param field The field currently occupied.
      * @param location The location within the field.
