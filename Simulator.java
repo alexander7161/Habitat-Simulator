@@ -30,8 +30,10 @@ public class Simulator
     private List<Animal> animals;
     // The current state of the field.
     private Field field;
-    // The current step of the simulation.
+    // The current step of the simulation. Each step represents 1 hour.
     private int step;
+    //the current time of the day in hours.
+    private int time;
     // A graphical view of the simulation.
     private SimulatorView view;
     
@@ -88,7 +90,7 @@ public class Simulator
      */
     public void simulate(int numSteps)
     {
-        for(int step = 1; step <= numSteps && view.isViable(field); step++) {
+        for(int step = 1; step <= numSteps && view.isViable(field); incrementStep()) {
             simulateOneStep();
             // delay(60);   // uncomment this to run more slowly
         }
@@ -101,7 +103,7 @@ public class Simulator
      */
     public void simulateOneStep()
     {
-        step++;
+        incrementStep();
 
         // Provide space for newborn animals.
         List<Animal> newAnimals = new ArrayList<>();        
@@ -184,5 +186,15 @@ public class Simulator
         catch (InterruptedException ie) {
             // wake up
         }
+    }
+    
+    /**
+     *
+     *
+     */
+    private void incrementStep()
+    {
+        step++;
+        time = step%24;
     }
 }
