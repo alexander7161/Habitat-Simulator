@@ -31,7 +31,6 @@ public class Simulator
     private List<Entity> entities;
     // The current state of the field.
     private Field field;
-    private Field fieldPlant;
     // The current step of the simulation. Each step represents 1 hour.
     private int step;
     //the current time of the day in hours.
@@ -66,7 +65,7 @@ public class Simulator
 
         entities = new ArrayList<>();
         field = new Field(depth, width);
-        fieldPlant = new Field(depth, width);
+        field.createPlantField();
 
         weather = new Weather();
 
@@ -156,9 +155,10 @@ public class Simulator
         for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {
 
+
                 if(rand.nextDouble() <= PLANT_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Plant plant = new Plant(true, fieldPlant, location);
+                    Plant plant = new Plant(true, field.getPlantField(), location);
                     entities.add(plant);
                 }
 

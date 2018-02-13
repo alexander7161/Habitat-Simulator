@@ -20,7 +20,8 @@ public class Field
     private int depth, width;
     // Storage for the animals.
     private Object[][] field;
-    private Object[][] fieldPlant;
+    
+    private Field fieldPlant;
 
     /**
      * Represent a field of the given dimensions.
@@ -32,7 +33,6 @@ public class Field
         this.depth = depth;
         this.width = width;
         field = new Object[depth][width];
-        fieldPlant = new Object[depth][width];
     }
 
     /**
@@ -109,7 +109,7 @@ public class Field
      */
     public Object getPlantAt(int row, int col)
     {
-        return fieldPlant[row][col];
+        return fieldPlant.getObjectAt(row, col);
     }
 
 
@@ -226,5 +226,16 @@ public class Field
     public int getWidth()
     {
         return width;
+    }
+
+    public Field getPlantField()
+    {
+        return fieldPlant;
+
+    }
+    
+    public void createPlantField()
+    {
+        fieldPlant = new Field(depth, width);
     }
 }
