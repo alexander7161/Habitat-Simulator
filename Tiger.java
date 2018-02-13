@@ -74,5 +74,15 @@ public class Tiger extends Predator
         Animal young;
         return young = new Tiger(false, field, loc);
     }
+    
+    protected boolean nightTimeSleep(int time)
+    { 
+        if( (0 <= time) && (time <= 6)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
 }
