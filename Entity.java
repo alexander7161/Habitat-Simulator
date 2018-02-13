@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.Random;
+import java.util.Iterator;
 
 /**
  * Abstract class Entity - write a description of the class here
@@ -16,6 +19,8 @@ public abstract class Entity
     // The animal's position in the field.
     private Location location;
     
+    private Random rand = new Random();
+    
     public Entity(Field field, Location location)
     {
         alive = true;
@@ -23,11 +28,35 @@ public abstract class Entity
         setLocation(location);
     }
     
-    protected int getAge()
+        /**
+     * Make this animal act - that is: make it do
+     * whatever it wants/needs to do.
+     * @param newAnimals A list to receive newly born animals.
+     */
+    abstract public void act(List<Entity> newEntities);
+    
+    /**
+     * Generate a number representing the number of births,
+     * if it can breed.
+     * @return The number of births (may be zero).
+     */
+    protected int breed()
     {
-        return age;
+        int births = 0;
+        if(canBreedAge() && rand.nextDouble() <= getBREEDING_PROBABILITY()) {
+            births = rand.nextInt(getMAX_LITTER_SIZE()) + 1;
+        }
+        return births;
     }
-
+    
+    protected boolean canBreedAge()
+    {
+        return age >= getBREEDING_AGE();
+    }
+    
+    protected abstract double getBREEDING_PROBABILITY();
+    protected abstract int getBREEDING_AGE();
+    protected abstract int getMAX_LITTER_SIZE();
     
     /**
      * Return the animal's location.
