@@ -34,34 +34,33 @@ public abstract class Predator extends Animal
     {
         incrementAge();
         incrementHunger();
-        if(checkTime(time))
+        if(nightTimeSleep(time))
         {
-            return;
+            if(isAlive()) {
+                giveBirth(newPredators);            
+                // Move towards a source of food if found.
+                Location newLocation = findFood();
+                if(newLocation == null) { 
+                    // No food found - try to move to a free location.
+                    newLocation = getField().freeAdjacentLocation(getLocation());
+                }
+                // See if it was possible to move.
+                if(newLocation != null) {
+                    setLocation(newLocation);
+                }
+                else {
+                    // Overcrowding.
+                    setDead();
+                }
+            }
         }
-        if(isAlive()) {
-            giveBirth(newPredators);            
-            // Move towards a source of food if found.
-            Location newLocation = findFood();
-            if(newLocation == null) { 
-                // No food found - try to move to a free location.
-                newLocation = getField().freeAdjacentLocation(getLocation());
-            }
-            // See if it was possible to move.
-            if(newLocation != null) {
-                setLocation(newLocation);
-            }
-            else {
-                // Overcrowding.
-                setDead();
-            }
-        }
+
     }
     
-    protected boolean checkTime(int time)
+    protected boolean nightTimeSleep(int time)
     { 
         return false;
     }
-    
     
         /**
      * Look for rabbits adjacent to the current location.
