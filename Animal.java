@@ -10,7 +10,7 @@ import java.util.Iterator;
  */
 public abstract class Animal extends Entity
 {
-    
+    protected int foodLevel;
     private int gender;
     private Random rand = new Random();
     
@@ -94,5 +94,21 @@ public abstract class Animal extends Entity
         else {
             return false;
         }
+    }
+    
+    /**
+     * Make this fox more hungry. This could result in the fox's death.
+     */
+    protected void incrementHunger()
+    {
+        foodLevel--;
+        if(foodLevel <= 0) {
+            setDead();
+        }
+    }
+    
+    protected void addFoodValue(int foodValue)
+    {
+        foodLevel += foodValue;
     }
 }
