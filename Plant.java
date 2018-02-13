@@ -29,9 +29,9 @@ public class Plant extends Entity
             age = 0;
         }
     }
-    
+
         /**
-     * This is what the rabbit does most of the time - it runs 
+     * This is what the rabbit does most of the time - it runs
      * around. Sometimes it will breed or die of old age.
      * @param newRabbits A list to return newly born rabbits.
      */
@@ -39,12 +39,12 @@ public class Plant extends Entity
     {
         incrementAge();
         if(isAlive()) {
-            giveBirth(newEntities);            
+            giveBirth(newEntities);
         }
     }
-    
-    
-    
+
+
+
     /**
      * Check whether or not this fox is to give birth at this step.
      * New births will be made into free adjacent locations.
@@ -54,7 +54,7 @@ public class Plant extends Entity
     {
         // New foxes are born into adjacent locations.
         // Get a list of adjacent free locations.
-        
+
         Field field = getField();
         List<Location> free = field.getFreeAdjacentLocations(getLocation());
         int births = breed();
@@ -64,14 +64,14 @@ public class Plant extends Entity
             newAnimals.add(young);
         }
         }
-        
+
     protected Entity getNewAnimal(boolean randomAge, Field field, Location loc)
     {
         Entity young;
         return young = new Plant(false, field, loc);
     }
 
-    
+
     protected int getMAX_AGE()
     {
         return MAX_AGE;
@@ -87,6 +87,10 @@ public class Plant extends Entity
     protected double getBREEDING_PROBABILITY()
     {
         return BREEDING_PROBABILITY;
+    }
+    protected int getFOOD_VALUE()
+    {
+    return age;
     }
 
 }
