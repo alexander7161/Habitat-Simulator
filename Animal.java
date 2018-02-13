@@ -12,6 +12,7 @@ public abstract class Animal extends Entity
 {
     
     private int gender;
+
     private Random rand = new Random();
     
     /**
@@ -27,6 +28,7 @@ public abstract class Animal extends Entity
         
     }
     
+
     /**
      * Make this animal act - that is: make it do
      * whatever it wants/needs to do.
@@ -57,6 +59,7 @@ public abstract class Animal extends Entity
     }
     protected abstract double getBREEDING_PROBABILITY();
     protected abstract int getMAX_LITTER_SIZE();
+
     
     protected abstract Animal getNewAnimal(boolean randomAge, Field field, Location location);
     
@@ -65,7 +68,7 @@ public abstract class Animal extends Entity
      * New births will be made into free adjacent locations.
      * @param newFoxes A list to return newly born foxes.
      */
-    protected void giveBirth(List<Animal> newAnimals)
+    protected void giveBirth(List<Entity> newAnimals)
     {
         // New foxes are born into adjacent locations.
         // Get a list of adjacent free locations.
