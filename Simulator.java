@@ -189,7 +189,7 @@ public class Simulator
     }
     
     /**
-     *
+     * Increment step for and updates the time. Each step is 1 hour.
      *
      */
     private void incrementStep()
