@@ -23,8 +23,9 @@ public class SimulatorView extends JFrame
     private static final Color UNKNOWN_COLOR = Color.gray;
 
     private final String STEP_PREFIX = "Step: ";
+    private final String TIME_PREFIX = "Time: ";
     private final String POPULATION_PREFIX = "Population: ";
-    private JLabel stepLabel, population, infoLabel;
+    private JLabel stepLabel,timeLabel, population, infoLabel;
     private FieldView fieldView;
     
     // A map for storing colors for participants in the simulation
@@ -44,6 +45,7 @@ public class SimulatorView extends JFrame
 
         setTitle("Animal Simulation");
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
+        timeLabel = new JLabel(TIME_PREFIX, JLabel.CENTER);
         infoLabel = new JLabel("  ", JLabel.CENTER);
         population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
         
@@ -55,6 +57,7 @@ public class SimulatorView extends JFrame
         
         JPanel infoPane = new JPanel(new BorderLayout());
             infoPane.add(stepLabel, BorderLayout.WEST);
+            infoPane.add(timeLabel, BorderLayout.EAST);
             infoPane.add(infoLabel, BorderLayout.CENTER);
         contents.add(infoPane, BorderLayout.NORTH);
         contents.add(fieldView, BorderLayout.CENTER);
@@ -101,13 +104,14 @@ public class SimulatorView extends JFrame
      * @param step Which iteration step it is.
      * @param field The field whose status is to be displayed.
      */
-    public void showStatus(int step, Field field)
+    public void showStatus(int step,int time, Field field)
     {
         if(!isVisible()) {
             setVisible(true);
         }
             
         stepLabel.setText(STEP_PREFIX + step);
+        timeLabel.setText(TIME_PREFIX + time + ":00");
         stats.reset();
         
         fieldView.preparePaint();
