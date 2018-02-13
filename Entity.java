@@ -18,23 +18,23 @@ public abstract class Entity
     private Field field;
     // The animal's position in the field.
     private Location location;
-    
+
     private Random rand = new Random();
-    
+
     public Entity(Field field, Location location)
     {
         alive = true;
         this.field = field;
         setLocation(location);
     }
-    
+
         /**
      * Make this animal act - that is: make it do
      * whatever it wants/needs to do.
      * @param newAnimals A list to receive newly born animals.
      */
     abstract public void act(List<Entity> newEntities, int time);
-    
+
     /**
      * Generate a number representing the number of births,
      * if it can breed.
@@ -48,16 +48,16 @@ public abstract class Entity
         }
         return births;
     }
-    
+
     protected boolean canBreedAge()
     {
         return age >= getBREEDING_AGE();
     }
-    
+
     protected abstract double getBREEDING_PROBABILITY();
     protected abstract int getBREEDING_AGE();
     protected abstract int getMAX_LITTER_SIZE();
-    
+
     /**
      * Return the animal's location.
      * @return The animal's location.
@@ -66,7 +66,7 @@ public abstract class Entity
     {
         return location;
     }
-    
+
     /**
      * Place the animal at the new location in the given field.
      * @param newLocation The animal's new location.
@@ -79,7 +79,7 @@ public abstract class Entity
         location = newLocation;
         field.place(this, newLocation);
     }
-    
+
      /**
      * Return the animal's field.
      * @return The animal's field.
@@ -88,7 +88,7 @@ public abstract class Entity
     {
         return field;
     }
-    
+
     /**
      * Check whether the animal is alive or not.
      * @return true if the animal is still alive.
@@ -97,7 +97,7 @@ public abstract class Entity
     {
         return alive;
     }
-    
+
        /**
      * Increase the age.
      * This could result in the rabbit's death.
@@ -109,7 +109,7 @@ public abstract class Entity
             setDead();
         }
     }
-    
+
     /**
      * Indicate that the animal is no longer alive.
      * It is removed from the field.
@@ -123,7 +123,7 @@ public abstract class Entity
             field = null;
         }
     }
-    
+
     protected abstract int getMAX_AGE();
-    
+
 }
