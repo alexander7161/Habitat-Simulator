@@ -27,6 +27,38 @@ public abstract class Animal extends Entity
         
     }
     
+
+    /**
+     * Make this animal act - that is: make it do
+     * whatever it wants/needs to do.
+     * @param newAnimals A list to receive newly born animals.
+     */
+    abstract public void act(List<Animal> newAnimals,int time);
+
+    
+    protected boolean canBreedAge()
+    {
+        return getAge() >= getBREEDING_AGE();
+    }
+    
+    protected abstract int getBREEDING_AGE();
+    
+    /**
+     * Generate a number representing the number of births,
+     * if it can breed.
+     * @return The number of births (may be zero).
+     */
+    protected int breed()
+    {
+        int births = 0;
+        if(canBreedAge() && rand.nextDouble() <= getBREEDING_PROBABILITY()) {
+            births = rand.nextInt(getMAX_LITTER_SIZE()) + 1;
+        }
+        return births;
+    }
+    protected abstract double getBREEDING_PROBABILITY();
+    protected abstract int getMAX_LITTER_SIZE();
+
     
     protected abstract Animal getNewAnimal(boolean randomAge, Field field, Location location);
     

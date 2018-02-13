@@ -31,6 +31,7 @@ public abstract class Predator extends Animal
      * @param newFoxes A list to return newly born foxes.
      */
     public void act(List<Entity> newPredators, int time)
+
     {
         incrementAge();
         incrementHunger();

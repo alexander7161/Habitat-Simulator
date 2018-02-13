@@ -108,12 +108,13 @@ public class Simulator
         // Provide space for newborn animals.
         List<Animal> newAnimals = new ArrayList<>();        
         // Let all rabbits act.
-        for(Iterator<Animal> it = animals.iterator(); it.hasNext(); ) {
-            Animal animal = it.next();
-            animal.act(newAnimals, time);
-                if(! animal.isAlive()) {
-                    it.remove();
-                
+
+
+        for(Iterator<Entity> it = entities.iterator(); it.hasNext(); ) {
+            Entity entity = it.next();
+            entity.act(newEntities);
+            if(! entity.isAlive()) {
+                it.remove();
             }
         }
                

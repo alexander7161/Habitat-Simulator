@@ -22,6 +22,7 @@ public abstract class Prey extends Animal
      * @param newRabbits A list to return newly born rabbits.
      */
     public void act(List<Entity> newPrey, int time)
+
     {
         incrementAge();
         if(isAlive()) {
