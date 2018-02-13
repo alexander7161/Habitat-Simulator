@@ -25,6 +25,7 @@ public class Simulator
     private static final double TIGER_CREATION_PROBABILITY = 0.02; 
     private static final double SQUIRREL_CREATION_PROBABILITY = 0.08; 
     private static final double MOUSE_CREATION_PROBABILITY = 0.08; 
+    private static final double PLANT_CREATION_PROBABILITY = 0.03; 
 
     // List of entities in the field.
     private List<Entity> entities;
@@ -152,6 +153,8 @@ public class Simulator
         field.clear();
         for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {
+               
+                
                 if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Fox fox = new Fox(true, field, location);
