@@ -33,7 +33,7 @@ public abstract class Entity
      * whatever it wants/needs to do.
      * @param newAnimals A list to receive newly born animals.
      */
-    abstract public void act(List<Entity> newEntities);
+    abstract public void act(List<Entity> newEntities, int time);
     
     /**
      * Generate a number representing the number of births,

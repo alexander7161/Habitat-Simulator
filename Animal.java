@@ -28,18 +28,7 @@ public abstract class Animal extends Entity
     }
     
 
-    /**
-     * Make this animal act - that is: make it do
-     * whatever it wants/needs to do.
-     * @param newAnimals A list to receive newly born animals.
-     */
-    abstract public void act(List<Animal> newAnimals,int time);
 
-    
-    protected boolean canBreedAge()
-    {
-        return getAge() >= getBREEDING_AGE();
-    }
     
     protected abstract int getBREEDING_AGE();
     
