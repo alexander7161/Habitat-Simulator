@@ -24,12 +24,10 @@ public class Simulator
     private static final double RABBIT_CREATION_PROBABILITY = 0.08;
     private static final double TIGER_CREATION_PROBABILITY = 0.02; 
     private static final double SQUIRREL_CREATION_PROBABILITY = 0.08; 
-    private static final double MOUSE_CREATION_PROBABILITY = 0.08;
-    private static final double PLANT_CREATION_PROBABILITY = 0.5;
+    private static final double MOUSE_CREATION_PROBABILITY = 0.08; 
 
-    // List of animals in the field.
+    // List of entities in the field.
     private List<Entity> entities;
-    
     // The current state of the field.
     private Field field;
     // The current step of the simulation. Each step represents 1 hour.
@@ -38,6 +36,9 @@ public class Simulator
     private int time;
     // A graphical view of the simulation.
     private SimulatorView view;
+    
+    private Weather weather;
+    
     
     /**
      * Construct a simulation field with default size.
@@ -63,6 +64,8 @@ public class Simulator
         
         entities = new ArrayList<>();
         field = new Field(depth, width);
+        
+        weather = new Weather();
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
@@ -106,11 +109,12 @@ public class Simulator
     public void simulateOneStep()
     {
         incrementStep();
+        weather.updateWeather();
 
-        // Provide space for newborn animals.
-        List<Entity> newEntities = new ArrayList<>();
-        
+        // Provide space for newborn entities.
+        List<Entity> newEntities = new ArrayList<>();        
         // Let all rabbits act.
+
 
         for(Iterator<Entity> it = entities.iterator(); it.hasNext(); ) {
             Entity entity = it.next();
@@ -119,7 +123,6 @@ public class Simulator
                 it.remove();
             }
         }
-        
                
         // Add the newly born foxes and rabbits to the main lists.
         entities.addAll(newEntities);
@@ -149,13 +152,6 @@ public class Simulator
         field.clear();
         for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {
-                
-                if(rand.nextDouble() <= PLANT_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
-                    Plant plant = new Plant(true, field, location);
-                    entities.add(plant);
-                }
-                
                 if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Fox fox = new Fox(true, field, location);

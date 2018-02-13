@@ -12,7 +12,6 @@ public abstract class Animal extends Entity
 {
     
     private int gender;
-
     private Random rand = new Random();
     
     /**
@@ -29,7 +28,7 @@ public abstract class Animal extends Entity
     }
     
 
-    
+
     
     protected abstract int getBREEDING_AGE();
     

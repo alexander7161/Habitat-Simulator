@@ -10,8 +10,8 @@ public class Weather
     // instance variables - replace the example below with your own
     
     
-    private static final double FOG_PROPABILITY = 0.08;
-    private static final double RAIN_PROPABILITY = 0.08;
+    private static final double FOG_PROPABILITY = 0.1;
+    private static final double RAIN_PROPABILITY = 0.7;
     
     private boolean rain;
     private boolean fog;
@@ -55,3 +55,4 @@ public class Weather
         return fog;
     }
 }
+
