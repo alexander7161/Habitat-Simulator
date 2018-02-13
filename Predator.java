@@ -11,7 +11,7 @@ import java.util.Random;
 public abstract class Predator extends Animal
 {
     // instance variables - replace the example below with your own
-    protected int foodLevel;
+    
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
 
@@ -80,7 +80,7 @@ public abstract class Predator extends Animal
                 Prey prey = (Prey) animal;
                 if(prey.isAlive()) { 
                    prey.setDead();
-                   foodLevel += prey.getFOOD_VALUE();
+                   addFoodValue(prey.getFOOD_VALUE());
                    return where;
                 }
             }
@@ -88,16 +88,6 @@ public abstract class Predator extends Animal
         return null;
     }
 
-    /**
-     * Make this fox more hungry. This could result in the fox's death.
-     */
-    protected void incrementHunger()
-    {
-        foodLevel--;
-        if(foodLevel <= 0) {
-            setDead();
-        }
-    }
 
     
 }

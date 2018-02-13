@@ -1,4 +1,7 @@
 import java.util.List;
+import java.util.Iterator;
+import java.util.Random;
+
 /**
  * Abstract class Prey - write a description of the class here
  *
@@ -7,12 +10,18 @@ import java.util.List;
  */
 public abstract class Prey extends Animal
 {
+    private static final int INITIAL_HUNGER_VALUE = 7;
+    private static final Random rand = Randomizer.getRandom();
+
 
     /**
      *
      */
     public Prey (Field field, Location location){
         super(field, location);
+        foodLevel = rand.nextInt( INITIAL_HUNGER_VALUE );
+
+
 
     }
 
@@ -51,21 +60,16 @@ public abstract class Prey extends Animal
 protected Location findFood()
 {
     Field field = getField();
-    List<Location> adjacent = field.adjacentLocations(getLocation());
-    Iterator<Location> it = adjacent.iterator();
-    while(it.hasNext()) {
-        Location where = it.next();
-        Object plant = field.getPlantAt(where);
-        if(plant instanceof Plant)
+    Object object = field.getPlantAt(getLocation());
+        if(object instanceof Plant)
         {
-            Plant plant = (Plant) plant;
+            Plant plant = (Plant) object;
             if(plant.isAlive()) {
                plant.setDead();
-               foodLevel += plant.getFOOD_VALUE();
-               return where;
+               addFoodValue(plant.getFOOD_VALUE());
+               return getLocation();
             }
         }
-    }
     return null;
 }
 
