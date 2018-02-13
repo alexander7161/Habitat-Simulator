@@ -114,7 +114,7 @@ public class Simulator
 
         for(Iterator<Entity> it = entities.iterator(); it.hasNext(); ) {
             Entity entity = it.next();
-            entity.act(newEntities);
+            entity.act(newEntities, time);
             if(! entity.isAlive()) {
                 it.remove();
             }

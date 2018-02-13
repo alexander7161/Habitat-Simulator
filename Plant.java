@@ -35,7 +35,7 @@ public class Plant extends Entity
      * around. Sometimes it will breed or die of old age.
      * @param newRabbits A list to return newly born rabbits.
      */
-    public void act(List<Entity> newEntities)
+    public void act(List<Entity> newEntities, int time)
     {
         incrementAge();
         if(isAlive()) {
