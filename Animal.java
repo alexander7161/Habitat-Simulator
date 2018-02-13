@@ -117,38 +117,6 @@ public abstract class Animal
         return age >= getBREEDING_AGE();
     }
     
-    protected boolean canBreedGender()
-    {
-        Field field = getField();
-        List<Location> adjacent = field.adjacentLocations(getLocation());
-        Iterator<Location> it = adjacent.iterator();
-        boolean canBreedGender = false;
-        while(it.hasNext()) {
-            Location where = it.next();
-            Object animal = field.getObjectAt(where);
-            Animal nextAnimal = (Animal) animal;
-            if(nextAnimal==null || !this.getClass().equals(nextAnimal.getClass())) {
-                return false;
-            }
-            if((this.getMale() && !nextAnimal.getMale()) || (!this.getMale() && nextAnimal.getMale()))
-            {
-                canBreedGender = true;
-            }
-        }
-        return canBreedGender;
-    }
-    
-    protected boolean canBreed()
-    {
-        if(canBreedAge() && canBreedGender())
-        {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    
     protected abstract int getBREEDING_AGE();
     
     /**
@@ -186,9 +154,8 @@ public abstract class Animal
             Location where = it.next();
             Object animal = field.getObjectAt(where);
             Animal nextAnimal = (Animal) animal;
-            if(nextAnimal==null || !this.getClass().equals(nextAnimal.getClass())) {
-                return;
-            }
+            if(nextAnimal!=null && this.getClass().equals(nextAnimal.getClass())) {
+            
             if((this.getMale() && !nextAnimal.getMale()) || (!this.getMale() && nextAnimal.getMale()))
             {
                 List<Location> free = field.getFreeAdjacentLocations(getLocation());
@@ -199,6 +166,7 @@ public abstract class Animal
                 newAnimals.add(young);
             }
             }
+        }
         }
         
     }
