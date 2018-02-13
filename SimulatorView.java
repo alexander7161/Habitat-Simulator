@@ -24,8 +24,9 @@ public class SimulatorView extends JFrame
 
     private final String STEP_PREFIX = "Step: ";
     private final String TIME_PREFIX = "Time: ";
+    private final String WEATHER_PREFIX = "Weather: ";
     private final String POPULATION_PREFIX = "Population: ";
-    private JLabel stepLabel,timeLabel, population, infoLabel;
+    private JLabel stepLabel,timeLabel,weatherLabel, population, infoLabel;
     private FieldView fieldView;
     
     // A map for storing colors for participants in the simulation
@@ -46,6 +47,7 @@ public class SimulatorView extends JFrame
         setTitle("Animal Simulation");
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
         timeLabel = new JLabel(TIME_PREFIX, JLabel.CENTER);
+        weatherLabel = new JLabel(WEATHER_PREFIX, JLabel.CENTER);
         infoLabel = new JLabel("  ", JLabel.CENTER);
         population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
         
@@ -59,6 +61,7 @@ public class SimulatorView extends JFrame
             infoPane.add(stepLabel, BorderLayout.WEST);
             infoPane.add(timeLabel, BorderLayout.EAST);
             infoPane.add(infoLabel, BorderLayout.CENTER);
+            infoPane.add(weatherLabel, BorderLayout.CENTER);
         contents.add(infoPane, BorderLayout.NORTH);
         contents.add(fieldView, BorderLayout.CENTER);
         contents.add(population, BorderLayout.SOUTH);
@@ -112,6 +115,7 @@ public class SimulatorView extends JFrame
             
         stepLabel.setText(STEP_PREFIX + step);
         timeLabel.setText(TIME_PREFIX + time + ":00");
+        weatherLabel.setText(WEATHER_PREFIX);
         stats.reset();
         
         fieldView.preparePaint();

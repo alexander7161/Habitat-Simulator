@@ -37,6 +37,9 @@ public class Simulator
     // A graphical view of the simulation.
     private SimulatorView view;
     
+    private Weather weather;
+    
+    
     /**
      * Construct a simulation field with default size.
      */
@@ -61,6 +64,8 @@ public class Simulator
         
         entities = new ArrayList<>();
         field = new Field(depth, width);
+        
+        weather = new Weather();
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
@@ -104,6 +109,7 @@ public class Simulator
     public void simulateOneStep()
     {
         incrementStep();
+        weather.updateWeather();
 
         // Provide space for newborn entities.
         List<Entity> newEntities = new ArrayList<>();        
