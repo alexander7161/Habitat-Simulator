@@ -110,9 +110,10 @@ public class Simulator
         // Let all rabbits act.
         for(Iterator<Animal> it = animals.iterator(); it.hasNext(); ) {
             Animal animal = it.next();
-            animal.act(newAnimals);
-            if(! animal.isAlive()) {
-                it.remove();
+            animal.act(newAnimals, time);
+                if(! animal.isAlive()) {
+                    it.remove();
+                
             }
         }
                
