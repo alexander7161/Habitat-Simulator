@@ -170,6 +170,7 @@ public abstract class Animal
         }
         
     }
+    
     private boolean getMale()
     {
         if(gender==1)
