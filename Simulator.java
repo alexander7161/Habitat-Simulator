@@ -7,7 +7,7 @@ import java.awt.Color;
 /**
  * A simple predator-prey simulator, based on a rectangular field
  * containing rabbits and foxes.
- * 
+ *
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
  */
@@ -22,10 +22,10 @@ public class Simulator
     private static final double FOX_CREATION_PROBABILITY = 0.02;
     // The probability that a rabbit will be created in any given grid position.
     private static final double RABBIT_CREATION_PROBABILITY = 0.08;
-    private static final double TIGER_CREATION_PROBABILITY = 0.02; 
-    private static final double SQUIRREL_CREATION_PROBABILITY = 0.08; 
-    private static final double MOUSE_CREATION_PROBABILITY = 0.08; 
-    private static final double PLANT_CREATION_PROBABILITY = 0.03; 
+    private static final double TIGER_CREATION_PROBABILITY = 0.02;
+    private static final double SQUIRREL_CREATION_PROBABILITY = 0.08;
+    private static final double MOUSE_CREATION_PROBABILITY = 0.08;
+    private static final double PLANT_CREATION_PROBABILITY = 0.03;
 
     // List of entities in the field.
     private List<Entity> entities;
@@ -37,10 +37,10 @@ public class Simulator
     private int time;
     // A graphical view of the simulation.
     private SimulatorView view;
-    
+
     private Weather weather;
-    
-    
+
+
     /**
      * Construct a simulation field with default size.
      */
@@ -48,7 +48,7 @@ public class Simulator
     {
         this(DEFAULT_DEPTH, DEFAULT_WIDTH);
     }
-    
+
     /**
      * Create a simulation field with the given size.
      * @param depth Depth of the field. Must be greater than zero.
@@ -62,10 +62,10 @@ public class Simulator
             depth = DEFAULT_DEPTH;
             width = DEFAULT_WIDTH;
         }
-        
+
         entities = new ArrayList<>();
         field = new Field(depth, width);
-        
+
         weather = new Weather();
 
         // Create a view of the state of each location in the field.
@@ -79,7 +79,7 @@ public class Simulator
         // Setup a valid starting point.
         reset();
     }
-    
+
     /**
      * Run the simulation from its current state for a reasonably long period,
      * (4000 steps).
@@ -88,7 +88,7 @@ public class Simulator
     {
         simulate(4000);
     }
-    
+
     /**
      * Run the simulation from its current state for the given number of steps.
      * Stop before the given number of steps if it ceases to be viable.
@@ -101,7 +101,7 @@ public class Simulator
             // delay(60);   // uncomment this to run more slowly
         }
     }
-    
+
     /**
      * Run the simulation from its current state for a single step.
      * Iterate over the whole field updating the state of each
@@ -113,7 +113,7 @@ public class Simulator
         weather.updateWeather();
 
         // Provide space for newborn entities.
-        List<Entity> newEntities = new ArrayList<>();        
+        List<Entity> newEntities = new ArrayList<>();
         // Let all rabbits act.
 
 
@@ -124,13 +124,13 @@ public class Simulator
                 it.remove();
             }
         }
-               
+
         // Add the newly born foxes and rabbits to the main lists.
         entities.addAll(newEntities);
 
         view.showStatus(step,time, field);
     }
-        
+
     /**
      * Reset the simulation to a starting position.
      */
@@ -139,11 +139,11 @@ public class Simulator
         step = 0;
         entities.clear();
         populate();
-        
+
         // Show the starting state in the view.
         view.showStatus(step,time, field);
     }
-    
+
     /**
      * Randomly populate the field with foxes and rabbits.
      */
@@ -153,13 +153,13 @@ public class Simulator
         field.clear();
         for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {
-                
+
                 if(rand.nextDouble() <= PLANT_CREATION_PROBABILITY) {
                     Location location = new Location(row, col, false);
                     Plant plant = new Plant(true, field, location);
                     entities.add(plant);
                 }
-                
+
                 if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Fox fox = new Fox(true, field, location);
@@ -189,7 +189,7 @@ public class Simulator
             }
         }
     }
-    
+
     /**
      * Pause for a given time.
      * @param millisec  The time to pause for, in milliseconds
@@ -203,7 +203,7 @@ public class Simulator
             // wake up
         }
     }
-    
+
     /**
      * Increment step for and updates the time. Each step is 1 hour.
      *
