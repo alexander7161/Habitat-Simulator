@@ -19,7 +19,7 @@ public class Field
     // The depth and width of the field.
     private int depth, width;
     // Storage for the animals.
-    private Object[][] field;
+    private Object[][][] field;
 
     /**
      * Represent a field of the given dimensions.
@@ -30,7 +30,7 @@ public class Field
     {
         this.depth = depth;
         this.width = width;
-        field = new Object[depth][width];
+        field = new Object[depth][width][2];
     }
     
     /**
@@ -40,7 +40,8 @@ public class Field
     {
         for(int row = 0; row < depth; row++) {
             for(int col = 0; col < width; col++) {
-                field[row][col] = null;
+                field[row][col][0] = null;
+                field[row][col][1] = null;
             }
         }
     }
@@ -51,7 +52,7 @@ public class Field
      */
     public void clear(Location location)
     {
-        field[location.getRow()][location.getCol()] = null;
+        field[location.getRow()][location.getCol()][0] = null;
     }
     
     /**
@@ -62,9 +63,9 @@ public class Field
      * @param row Row coordinate of the location.
      * @param col Column coordinate of the location.
      */
-    public void place(Object animal, int row, int col)
+    public void place(Object animal, int row, int col, boolean displayed)
     {
-        place(animal, new Location(row, col));
+        place(animal, new Location(row, col), displayed);
     }
     
     /**
@@ -74,9 +75,14 @@ public class Field
      * @param animal The animal to be placed.
      * @param location Where to place the animal.
      */
-    public void place(Object animal, Location location)
+    public void place(Object entity, Location location, boolean displayed)
     {
-        field[location.getRow()][location.getCol()] = animal;
+        if(displayed) {
+        field[location.getRow()][location.getCol()][0] = entity;
+    }
+    else {
+        field[location.getRow()][location.getCol()][1] = entity;
+    }
     }
     
     /**
@@ -97,7 +103,7 @@ public class Field
      */
     public Object getObjectAt(int row, int col)
     {
-        return field[row][col];
+        return field[row][col][0];
     }
     
     /**
