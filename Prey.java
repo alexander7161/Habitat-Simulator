@@ -21,7 +21,7 @@ public abstract class Prey extends Animal
      * around. Sometimes it will breed or die of old age.
      * @param newRabbits A list to return newly born rabbits.
      */
-    public void act(List<Animal> newPrey, int time)
+    public void act(List<Entity> newPrey, int time)
     {
         incrementAge();
         if(isAlive()) {
