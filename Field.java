@@ -8,7 +8,7 @@ import java.util.Random;
  * Represent a rectangular grid of field positions.
  * Each position is able to store a single animal.
  *
- * @author David J. Barnes and Michael Kölling
+ * @author David J. Barnes and Michael
  * @version 2016.02.29
  */
 public class Field
@@ -20,7 +20,7 @@ public class Field
     private int depth, width;
     // Storage for the animals.
     private Object[][] field;
-    
+
     private Field fieldPlant;
 
     /**
@@ -233,7 +233,7 @@ public class Field
         return fieldPlant;
 
     }
-    
+
     public void createPlantField()
     {
         fieldPlant = new Field(depth, width);
