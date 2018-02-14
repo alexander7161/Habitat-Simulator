@@ -8,7 +8,7 @@ import java.util.Random;
  * Represent a rectangular grid of field positions.
  * Each position is able to store a single animal.
  *
- * @author David J. Barnes
+ * @author David J. Barnes and Micheal
  * @version 2016.02.29
  */
 public class Field
