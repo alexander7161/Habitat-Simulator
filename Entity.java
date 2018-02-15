@@ -27,13 +27,12 @@ public abstract class Entity extends Actor
         this.field = field;
         setLocation(location);
     }
-
-        /**
-     * Make this animal act - that is: make it do
-     * whatever it wants/needs to do.
-     * @param newAnimals A list to receive newly born animals.
-     */
-    abstract public void act(List<Entity> newEntities, int time);
+    /**
+ * Make this animal act - that is: make it do
+ * whatever it wants/needs to do.
+ * @param newAnimals A list to receive newly born animals.
+ */
+abstract public void act(List<Entity> newEntities, int time);
 
     /**
      * Generate a number representing the number of births,

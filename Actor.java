@@ -7,18 +7,13 @@
  */
 public abstract class Actor
 {
-    // instance variables - replace the example below with your own
-    private int x;
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
-    }
+  /**
+* Make this animal act - that is: make it do
+* whatever it wants/needs to do.
+* @param newAnimals A list to receive newly born animals.
+*/
+abstract public void act(List<Entity> newEntities, int time);
+
+
 }
