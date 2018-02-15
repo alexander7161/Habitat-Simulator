@@ -5,7 +5,7 @@ import java.util.Random;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Weather
+public class Weather extends Actor
 {
     // instance variables - replace the example below with your own
     

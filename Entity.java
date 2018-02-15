@@ -8,7 +8,7 @@ import java.util.Iterator;
  * @author (your name here)
  * @version (version number or date here)
  */
-public abstract class Entity
+public abstract class Entity extends Actor
 {
     // Whether the animal is alive or not.
     private boolean alive;
@@ -27,13 +27,12 @@ public abstract class Entity
         this.field = field;
         setLocation(location);
     }
-
-        /**
-     * Make this animal act - that is: make it do
-     * whatever it wants/needs to do.
-     * @param newAnimals A list to receive newly born animals.
-     */
-    abstract public void act(List<Entity> newEntities, int time);
+    /**
+ * Make this animal act - that is: make it do
+ * whatever it wants/needs to do.
+ * @param newAnimals A list to receive newly born animals.
+ */
+abstract public void act(List<Entity> newEntities, int time);
 
     /**
      * Generate a number representing the number of births,
