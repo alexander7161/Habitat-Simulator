@@ -14,6 +14,8 @@ public abstract class Animal extends Entity
     private int gender;
     private Random rand = new Random();
     private Disease disease;
+    private static final double PROBABILITY_OF_INFECTION_RANDOM = 0.00001;
+    private static final double PROBABILITY_OF_INFECTION_CONTACT = 0.1;
     
     /**
      * Create a new animal at location in field.
@@ -28,24 +30,54 @@ public abstract class Animal extends Entity
         
     }
     
+    protected void randomDisease()
+    {
 
+        if (rand.nextDouble() <= PROBABILITY_OF_INFECTION_RANDOM ) {
+            disease = new Disease();
+            System.out.println("random disease");
+        }
 
+    }  
+    
+    protected boolean getDiseased()
+    {
+        if(disease!=null)
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    
+    protected void spreadDisease()
+    {
+        if(getDiseased()) {
+            Field field = getField();
+            List<Location> adjacent = field.adjacentLocations(getLocation());
+            Iterator<Location> it = adjacent.iterator();
+            while(it.hasNext()) {
+                Location where = it.next();
+                Object animal = field.getObjectAt(where);
+                Animal nextAnimal = (Animal) animal;
+                if(nextAnimal!=null && this.getClass().equals(nextAnimal.getClass())) {
+                    if (rand.nextDouble() <= PROBABILITY_OF_INFECTION_CONTACT ) {
+                        nextAnimal.giveDisease(disease);
+                    }
+                }
+            }
+        }   
+    }      
+    
+    protected void giveDisease(Disease disease)
+    {
+        this.disease = disease;
+        //System.out.println("disease spread");
+    }
     
     protected abstract int getBREEDING_AGE();
     
-    /**
-     * Generate a number representing the number of births,
-     * if it can breed.
-     * @return The number of births (may be zero).
-     */
-    protected int breed()
-    {
-        int births = 0;
-        if(canBreedAge() && rand.nextDouble() <= getBREEDING_PROBABILITY()) {
-            births = rand.nextInt(getMAX_LITTER_SIZE()) + 1;
-        }
-        return births;
-    }
     protected abstract double getBREEDING_PROBABILITY();
     protected abstract int getMAX_LITTER_SIZE();
 

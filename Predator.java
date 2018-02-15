@@ -11,7 +11,6 @@ import java.util.Random;
 public abstract class Predator extends Animal
 {
     // instance variables - replace the example below with your own
-    
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
 
@@ -34,10 +33,12 @@ public abstract class Predator extends Animal
     {
         incrementAge();
         incrementHunger();
+        randomDisease();
         if(nightTimeSleep(time))
         {
             if(isAlive()) {
-                giveBirth(newPredators);            
+                giveBirth(newPredators); 
+                spreadDisease();
                 // Move towards a source of food if found.
                 Location newLocation = findFood();
                 if(newLocation == null) { 

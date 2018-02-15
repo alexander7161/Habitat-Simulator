@@ -34,8 +34,10 @@ public abstract class Prey extends Animal
     {
         incrementAge();
         incrementHunger();
+        randomDisease();
         if(isAlive()) {
             giveBirth(newPrey);
+            spreadDisease();
             // Try to move into a free location.
             Location newLocation = findFood();
             if(newLocation == null) {

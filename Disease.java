@@ -8,7 +8,7 @@ import java.util.List;
 public class Disease
 {
     // instance variables - replace the example below with your own
-    private boolean disease;
+    
     private static final double PROBABILITY_OF_INFECTION = 0.2;
 
     /**
@@ -20,13 +20,9 @@ public class Disease
         
     }
     
-    public void setDiseased()
+
+    public double getProbability()
     {
-        disease = true;
-    }
-    
-    public boolean isDiseased()
-    {
-        return disease;
+        return PROBABILITY_OF_INFECTION;
     }
 }
