@@ -111,7 +111,6 @@ public class Simulator
     public void simulateOneStep()
     {
         incrementStep();
-        weather.updateWeather();
 
         // Provide space for newborn actors.
         List<Actor> newActors = new ArrayList<>();
@@ -127,7 +126,7 @@ public class Simulator
         }
 
         // Add the newly born foxes and rabbits to the main lists.
-        actors.addAll(newActor);
+        actors.addAll(newActors);
 
         view.showStatus(step,time, field);
     }
@@ -138,7 +137,7 @@ public class Simulator
     public void reset()
     {
         step = 0;
-        actor.clear();
+        actors.clear();
         populate();
 
         // Show the starting state in the view.

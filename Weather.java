@@ -1,4 +1,6 @@
+import java.util.List;
 import java.util.Random;
+import java.util.Iterator;
 /**
  * Write a description of class Weather here.
  *
@@ -22,12 +24,6 @@ public class Weather extends Actor
      */
     public Weather()
     {
-        updateWeather();
-    }
-    
-    public void act(List<Entity> newEntities, int time)
-    {
-        
     }
 
     /**
@@ -36,7 +32,7 @@ public class Weather extends Actor
      * @param  y  a sample parameter for a method
      * @return    the sum of x and y
      */
-    public void updateWeather()
+    public void act(List<Actor> newActors, int time)
     {
         Random rand = Randomizer.getRandom();
         rain= false;
@@ -48,6 +44,15 @@ public class Weather extends Actor
         if(rand.nextDouble() <= RAIN_PROPABILITY) {
             rain = true;
         }
+    }
+    
+    /**
+     * Check whether the animal is alive or not.
+     * @return true if the animal is still alive.
+     */
+    protected boolean isAlive()
+    {
+        return true;
     }
     
     public boolean isRaining()
