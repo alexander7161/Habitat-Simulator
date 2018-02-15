@@ -8,7 +8,7 @@ import java.util.Iterator;
  * @author (your name here)
  * @version (version number or date here)
  */
-public abstract class Entity
+public abstract class Entity extends Actor
 {
     // Whether the animal is alive or not.
     private boolean alive;
