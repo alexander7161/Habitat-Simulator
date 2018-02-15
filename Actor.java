@@ -10,8 +10,31 @@ import java.util.Iterator;
  */
 public abstract class Actor
 {
+    // Whether the animal is alive or not.
+    private boolean alive;
     
-    protected abstract boolean isAlive();
+    public Actor()
+    {
+        alive = true;
+    }
+    
+    /**
+     * Check whether the animal is alive or not.
+     * @return true if the animal is still alive.
+     */
+    protected boolean isAlive()
+    {
+        return alive;
+    }
+    
+    /**
+     * Indicate that the animal is no longer alive.
+     * It is removed from the field.
+     */
+    protected void setDead()
+    {
+        alive = false;
+    }
 
 
   /**

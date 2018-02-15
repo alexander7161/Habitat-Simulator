@@ -10,8 +10,7 @@ import java.util.Iterator;
  */
 public abstract class Entity extends Actor
 {
-    // Whether the animal is alive or not.
-    private boolean alive;
+    
     // Whether the animal is alive or not.
     protected int age;
     // The animal's field.
@@ -23,19 +22,12 @@ public abstract class Entity extends Actor
 
     public Entity(Field field, Location location)
     {
-        alive = true;
+        
         this.field = field;
         setLocation(location);
     }
     
-    /**
-     * Check whether the animal is alive or not.
-     * @return true if the animal is still alive.
-     */
-    protected boolean isAlive()
-    {
-        return alive;
-    }
+    
 
     /**
      * Generate a number representing the number of births,
@@ -104,20 +96,22 @@ public abstract class Entity extends Actor
             setDead();
         }
     }
-
+    
     /**
      * Indicate that the animal is no longer alive.
      * It is removed from the field.
      */
     protected void setDead()
     {
-        alive = false;
+        super.setDead();
         if(location != null) {
             field.clear(location);
             location = null;
             field = null;
         }
     }
+
+    
 
     protected abstract int getMAX_AGE();
 
