@@ -27,6 +27,7 @@ public abstract class Entity extends Actor
         this.field = field;
         setLocation(location);
     }
+    
     /**
  * Make this animal act - that is: make it do
  * whatever it wants/needs to do.
