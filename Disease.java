@@ -18,7 +18,7 @@ public class Disease extends Actor
      */
     public Disease()
     {
-        // initialise instance variables
+        counter = 0;
         
     }
     
@@ -49,6 +49,7 @@ public class Disease extends Actor
     {
         if(counter >= STEPS_BEFORE_DEATH)
         {
+            System.out.println("disease done");
             return true;
         }
         else {

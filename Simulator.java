@@ -151,6 +151,7 @@ public class Simulator
     private void populate()
     {
         Random rand = Randomizer.getRandom();
+        actors.add(weather);
         field.clear();
         for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {
