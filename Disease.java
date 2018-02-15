@@ -8,7 +8,6 @@ import java.util.List;
 public class Disease extends Actor
 {
     private static final int STEPS_BEFORE_DEATH = 4;
-    private static final double PROBABILITY_OF_INFECTION = 0.2;
     private int counter;
 
     /**
@@ -35,12 +34,5 @@ public class Disease extends Actor
         else {
             return false;
         }
-    }
-
-
-
-    public double getProbability()
-    {
-        return PROBABILITY_OF_INFECTION;
     }
 }
