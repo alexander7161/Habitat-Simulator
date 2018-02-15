@@ -14,8 +14,8 @@ public abstract class Animal extends Entity
     private int gender;
     private Random rand = new Random();
     private Disease disease;
-    private static final double PROBABILITY_OF_INFECTION_RANDOM = 0.00001;
-    private static final double PROBABILITY_OF_INFECTION_CONTACT = 0.01;
+    private static final double PROBABILITY_OF_INFECTION_RANDOM = 0.0001;
+    private static final double PROBABILITY_OF_INFECTION_CONTACT = 0.1;
     
     /**
      * Create a new animal at location in field.
@@ -203,6 +203,7 @@ public abstract class Animal extends Entity
             {
                 setDead();
                 System.out.println("Disease dead");
+                disease.setDead();
             }
         }
     }
