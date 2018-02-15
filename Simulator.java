@@ -27,8 +27,8 @@ public class Simulator
     private static final double MOUSE_CREATION_PROBABILITY = 0.1;
     private static final double PLANT_CREATION_PROBABILITY = 0.5;
 
-    // List of entities in the field.
-    private List<Entity> entities;
+    // List of actors in the field.
+    private List<Actor> actors;
     // The current state of the field.
     private Field field;
     // The current step of the simulation. Each step represents 1 hour.
@@ -63,7 +63,7 @@ public class Simulator
             width = DEFAULT_WIDTH;
         }
 
-        entities = new ArrayList<>();
+        actors = new ArrayList<>();
         field = new Field(depth, width);
         field.createPlantField();
 
@@ -113,21 +113,21 @@ public class Simulator
         incrementStep();
         weather.updateWeather();
 
-        // Provide space for newborn entities.
-        List<Entity> newEntities = new ArrayList<>();
+        // Provide space for newborn actors.
+        List<Actor> newActors = new ArrayList<>();
         // Let all rabbits act.
 
 
-        for(Iterator<Entity> it = entities.iterator(); it.hasNext(); ) {
-            Entity entity = it.next();
-            entity.act(newEntities, time);
-            if(! entity.isAlive()) {
+        for(Iterator<Actor> it = actors.iterator(); it.hasNext(); ) {
+            Actor actor = it.next();
+            actor.act(newActors, time);
+            if(! actor.isAlive()) {
                 it.remove();
             }
         }
 
         // Add the newly born foxes and rabbits to the main lists.
-        entities.addAll(newEntities);
+        actors.addAll(newActor);
 
         view.showStatus(step,time, field);
     }
@@ -138,7 +138,7 @@ public class Simulator
     public void reset()
     {
         step = 0;
-        entities.clear();
+        actor.clear();
         populate();
 
         // Show the starting state in the view.
@@ -159,33 +159,33 @@ public class Simulator
                 if(rand.nextDouble() <= PLANT_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Plant plant = new Plant(true, field.getPlantField(), location);
-                    entities.add(plant);
+                    actors.add(plant);
                 }
 
                 if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Fox fox = new Fox(true, field, location);
-                    entities.add(fox);
+                    actors.add(fox);
                 }
                 else if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Rabbit rabbit = new Rabbit(true, field, location);
-                    entities.add(rabbit);
+                    actors.add(rabbit);
                 }
                 else if(rand.nextDouble() <= TIGER_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Tiger tiger = new Tiger(true, field, location);
-                    entities.add(tiger);
+                    actors.add(tiger);
                 }
                 else if(rand.nextDouble() <= SQUIRREL_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Squirrel squirrel = new Squirrel(true, field, location);
-                    entities.add(squirrel);
+                    actors.add(squirrel);
                 }
                 else if(rand.nextDouble() <= MOUSE_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Mouse mouse = new Mouse(true, field, location);
-                    entities.add(mouse);
+                    actors.add(mouse);
                 }
                 // else leave the location empty.
             }
