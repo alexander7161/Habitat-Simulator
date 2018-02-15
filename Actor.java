@@ -10,7 +10,7 @@ import java.util.Iterator;
  */
 public abstract class Actor
 {
-    
+
     protected abstract boolean isAlive();
 
 
