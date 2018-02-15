@@ -13,6 +13,7 @@ public abstract class Animal extends Entity
     protected int foodLevel;
     private int gender;
     private Random rand = new Random();
+    private Disease disease;
     
     /**
      * Create a new animal at location in field.
