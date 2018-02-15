@@ -29,7 +29,7 @@ public class Disease extends Actor
     {
         if(counter >= STEPS_BEFORE_DEATH)
         {
-            System.out.println("disease done");
+            //System.out.println("disease done");
             return true;
         }
         else {
