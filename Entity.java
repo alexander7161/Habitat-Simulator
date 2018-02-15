@@ -27,12 +27,15 @@ public abstract class Entity extends Actor
         this.field = field;
         setLocation(location);
     }
+    
     /**
- * Make this animal act - that is: make it do
- * whatever it wants/needs to do.
- * @param newAnimals A list to receive newly born animals.
- */
-abstract public void act(List<Entity> newEntities, int time);
+     * Check whether the animal is alive or not.
+     * @return true if the animal is still alive.
+     */
+    protected boolean isAlive()
+    {
+        return alive;
+    }
 
     /**
      * Generate a number representing the number of births,
@@ -88,14 +91,7 @@ abstract public void act(List<Entity> newEntities, int time);
         return field;
     }
 
-    /**
-     * Check whether the animal is alive or not.
-     * @return true if the animal is still alive.
-     */
-    protected boolean isAlive()
-    {
-        return alive;
-    }
+    
 
        /**
      * Increase the age.

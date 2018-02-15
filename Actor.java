@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.Random;
+import java.util.Iterator;
 
 /**
  * Abstract class Actor - write a description of the class here
@@ -7,6 +10,9 @@
  */
 public abstract class Actor
 {
+    
+    protected abstract boolean isAlive();
+
 
   /**
 * Make this animal act - that is: make it do
@@ -14,6 +20,8 @@ public abstract class Actor
 * @param newAnimals A list to receive newly born animals.
 */
 abstract public void act(List<Entity> newEntities, int time);
+
+
 
 
 }
