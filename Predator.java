@@ -34,6 +34,7 @@ public abstract class Predator extends Animal
         incrementAge();
         incrementHunger();
         randomDisease();
+        getDiseaseFinished();
         if(nightTimeSleep(time))
         {
             if(isAlive()) {

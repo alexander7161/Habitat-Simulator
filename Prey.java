@@ -35,6 +35,7 @@ public abstract class Prey extends Animal
         incrementAge();
         incrementHunger();
         randomDisease();
+        getDiseaseFinished();
         if(isAlive()) {
             giveBirth(newPrey);
             spreadDisease();

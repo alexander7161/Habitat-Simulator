@@ -32,12 +32,12 @@ public abstract class Animal extends Entity
     
     protected void randomDisease()
     {
-
-        if (rand.nextDouble() <= PROBABILITY_OF_INFECTION_RANDOM ) {
-            disease = new Disease();
-            System.out.println("random disease");
+        if(!getDiseased()) {
+            if (rand.nextDouble() <= PROBABILITY_OF_INFECTION_RANDOM ) {
+                disease = new Disease();
+                //System.out.println("random disease");
+            }
         }
-
     }  
     
     protected boolean getDiseased()
@@ -72,7 +72,7 @@ public abstract class Animal extends Entity
     
     protected void giveDisease(Disease disease)
     {
-        this.disease = disease;
+        this.disease = new Disease();
         //System.out.println("disease spread");
     }
     
@@ -143,5 +143,18 @@ public abstract class Animal extends Entity
     protected void addFoodValue(int foodValue)
     {
         foodLevel += foodValue;
+    }
+    
+    protected void getDiseaseFinished()
+    {
+        if(getDiseased())
+        {
+
+            if(disease.getDiseaseFinished())
+            {
+                setDead();
+                System.out.println("Disease dead");
+            }
+        }
     }
 }
