@@ -24,6 +24,11 @@ public class Weather extends Actor
     {
         updateWeather();
     }
+    
+    public void act(List<Entity> newEntities, int time)
+    {
+        
+    }
 
     /**
      * An example of a method - replace this comment with your own
