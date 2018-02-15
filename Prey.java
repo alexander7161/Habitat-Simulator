@@ -25,35 +25,7 @@ public abstract class Prey extends Animal
 
     }
 
-    /**
-     * This is what the rabbit does most of the time - it runs
-     * around. Sometimes it will breed or die of old age.
-     * @param newRabbits A list to return newly born rabbits.
-     */
-    public void act(List<Actor> newPrey, int time)
-    {
-        incrementAge();
-        incrementHunger();
-        randomDisease();
-        if(isAlive()) {
-            giveBirth(newPrey);
-            spreadDisease();
-            // Try to move into a free location.
-            Location newLocation = findFood();
-            if(newLocation == null) {
-                // No food found - try to move to a free location.
-                newLocation = getField().freeAdjacentLocation(getLocation());
-            }
-
-            if(newLocation != null) {
-                setLocation(newLocation);
-            }
-            else {
-                // Overcrowding.
-                setDead();
-            }
-        }
-    }
+    
     /**
  * Look for rabbits adjacent to the current location.
  * Only the first live rabbit is eaten.

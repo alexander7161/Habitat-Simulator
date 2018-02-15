@@ -22,46 +22,7 @@ public abstract class Predator extends Animal
         
     }
     
-    /**
-     * This is what the fox does most of the time: it hunts for
-     * rabbits. In the process, it might breed, die of hunger,
-     * or die of old age.
-     * @param field The field currently occupied.
-     * @param newFoxes A list to return newly born foxes.
-     */
-    public void act(List<Actor> newPredators, int time)
-    {
-        incrementAge();
-        incrementHunger();
-        randomDisease();
-        if(nightTimeSleep(time))
-        {
-            if(isAlive()) {
-                giveBirth(newPredators); 
-                spreadDisease();
-                // Move towards a source of food if found.
-                Location newLocation = findFood();
-                if(newLocation == null) { 
-                    // No food found - try to move to a free location.
-                    newLocation = getField().freeAdjacentLocation(getLocation());
-                }
-                // See if it was possible to move.
-                if(newLocation != null) {
-                    setLocation(newLocation);
-                }
-                else {
-                    // Overcrowding.
-                    setDead();
-                }
-            }
-        }
-
-    }
     
-    protected boolean nightTimeSleep(int time)
-    { 
-        return false;
-    }
     
         /**
      * Look for rabbits adjacent to the current location.

@@ -120,6 +120,7 @@ public class Simulator
         for(Iterator<Actor> it = actors.iterator(); it.hasNext(); ) {
             Actor actor = it.next();
             actor.act(newActors, time);
+            
             if(! actor.isAlive()) {
                 it.remove();
             }
@@ -150,6 +151,7 @@ public class Simulator
     private void populate()
     {
         Random rand = Randomizer.getRandom();
+        actors.add(weather);
         field.clear();
         for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {

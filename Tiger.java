@@ -78,10 +78,10 @@ public class Tiger extends Predator
     protected boolean nightTimeSleep(int time)
     { 
         if( (0 <= time) && (time <= 6)) {
-            return true;
+            return false;
         }
         else {
-            return false;
+            return true;
         }
     }
 

@@ -30,20 +30,66 @@ public abstract class Animal extends Entity
         
     }
     
-    protected void randomDisease()
+    /**
+     * This is what the fox does most of the time: it hunts for
+     * rabbits. In the process, it might breed, die of hunger,
+     * or die of old age.
+     * @param field The field currently occupied.
+     * @param newFoxes A list to return newly born foxes.
+     */
+    public void act(List<Actor> newActors, int time)
     {
-
-        if (rand.nextDouble() <= PROBABILITY_OF_INFECTION_RANDOM ) {
-            disease = new Disease();
-            System.out.println("random disease");
+        incrementAge();
+        incrementHunger();
+        randomDisease(newActors);
+        getDiseaseFinished();
+        if(nightTimeSleep(time))
+        {
+            if(isAlive()) {
+                giveBirth(newActors); 
+                spreadDisease(newActors);
+                // Move towards a source of food if found.
+                Location newLocation = findFood();
+                if(newLocation == null) { 
+                    // No food found - try to move to a free location.
+                    newLocation = getField().freeAdjacentLocation(getLocation());
+                }
+                // See if it was possible to move.
+                if(newLocation != null) {
+                    setLocation(newLocation);
+                }
+                else {
+                    // Overcrowding.
+                    setDead();
+                }
+            }
         }
 
+    }
+    
+    protected boolean nightTimeSleep(int time)
+    { 
+        return true;
+    }
+    
+    abstract protected Location findFood();
+    
+    protected void randomDisease(List<Actor> newActors)
+    {
+        if(!getDiseased()) {
+            if (rand.nextDouble() <= PROBABILITY_OF_INFECTION_RANDOM ) {
+                disease = new Disease();
+                newActors.add(disease);
+                //System.out.println("random disease");
+            }
+        }
     }  
     
     protected boolean getDiseased()
     {
         if(disease!=null)
         {
+            //System.out.println("Animal diseased");
             return true;
         }
         else {
@@ -51,7 +97,7 @@ public abstract class Animal extends Entity
         }
     }
     
-    protected void spreadDisease()
+    protected void spreadDisease(List<Actor> newActors)
     {
         if(getDiseased()) {
             Field field = getField();
@@ -63,16 +109,17 @@ public abstract class Animal extends Entity
                 Animal nextAnimal = (Animal) animal;
                 if(nextAnimal!=null && this.getClass().equals(nextAnimal.getClass())) {
                     if (rand.nextDouble() <= PROBABILITY_OF_INFECTION_CONTACT ) {
-                        nextAnimal.giveDisease(disease);
+                        nextAnimal.giveDisease(newActors);
                     }
                 }
             }
         }   
     }      
     
-    protected void giveDisease(Disease disease)
+    protected void giveDisease(List<Actor> newActors)
     {
-        this.disease = disease;
+        this.disease = new Disease();
+        newActors.add(disease);
         //System.out.println("disease spread");
     }
     
@@ -143,5 +190,17 @@ public abstract class Animal extends Entity
     protected void addFoodValue(int foodValue)
     {
         foodLevel += foodValue;
+    }
+    
+    protected void getDiseaseFinished()
+    {
+        if(getDiseased())
+        {
+            if(disease.getDiseaseFinished())
+            {
+                setDead();
+                System.out.println("Disease dead");
+            }
+        }
     }
 }
