@@ -15,7 +15,7 @@ public abstract class Animal extends Entity
     private Random rand = new Random();
     private Disease disease;
     private static final double PROBABILITY_OF_INFECTION_RANDOM = 0.00001;
-    private static final double PROBABILITY_OF_INFECTION_CONTACT = 0.1;
+    private static final double PROBABILITY_OF_INFECTION_CONTACT = 0.01;
     
     /**
      * Create a new animal at location in field.
@@ -39,14 +39,23 @@ public abstract class Animal extends Entity
      */
     public void act(List<Actor> newActors, int time)
     {
+        incrementHealth();
+        actMove(newActors);
+    }
+    
+    protected void incrementHealth()
+    {
         incrementAge();
         incrementHunger();
-        randomDisease(newActors);
         getDiseaseFinished();
-        if(nightTimeSleep(time))
-        {
-            if(isAlive()) {
+    }
+    
+    protected void actMove(List<Actor> newActors)
+    {
+        if(isAlive()) {
                 giveBirth(newActors); 
+                
+                randomDisease(newActors);
                 spreadDisease(newActors);
                 // Move towards a source of food if found.
                 Location newLocation = findFood();
@@ -63,14 +72,8 @@ public abstract class Animal extends Entity
                     setDead();
                 }
             }
-        }
-
     }
     
-    protected boolean nightTimeSleep(int time)
-    { 
-        return true;
-    }
     
     abstract protected Location findFood();
     

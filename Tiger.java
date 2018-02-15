@@ -75,7 +75,24 @@ public class Tiger extends Predator
         return young = new Tiger(false, field, loc);
     }
     
-    protected boolean nightTimeSleep(int time)
+    /**
+     * This is what the fox does most of the time: it hunts for
+     * rabbits. In the process, it might breed, die of hunger,
+     * or die of old age.
+     * @param field The field currently occupied.
+     * @param newFoxes A list to return newly born foxes.
+     */
+    public void act(List<Actor> newActors, int time)
+    {
+        incrementHealth();
+        if(getDayTime(time))
+        {
+            actMove(newActors);
+        }
+
+    }
+    
+    protected boolean getDayTime(int time)
     { 
         if( (0 <= time) && (time <= 6)) {
             return false;
