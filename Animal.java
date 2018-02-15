@@ -56,7 +56,7 @@ public abstract class Animal extends Entity
      * New births will be made into free adjacent locations.
      * @param newFoxes A list to return newly born foxes.
      */
-    protected void giveBirth(List<Entity> newAnimals)
+    protected void giveBirth(List<Actor> newAnimals)
     {
         // New foxes are born into adjacent locations.
         // Get a list of adjacent free locations.

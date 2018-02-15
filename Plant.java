@@ -35,11 +35,11 @@ public class Plant extends Entity
      * around. Sometimes it will breed or die of old age.
      * @param newRabbits A list to return newly born rabbits.
      */
-    public void act(List<Entity> newEntities, int time)
+    public void act(List<Actor> newActors, int time)
     {
         incrementAge();
         if(isAlive()) {
-            giveBirth(newEntities);
+            giveBirth(newActors);
         }
     }
 
@@ -50,7 +50,7 @@ public class Plant extends Entity
      * New births will be made into free adjacent locations.
      * @param newFoxes A list to return newly born foxes.
      */
-    protected void giveBirth(List<Entity> newAnimals)
+    protected void giveBirth(List<Actor> newAnimals)
     {
         // New foxes are born into adjacent locations.
         // Get a list of adjacent free locations.
