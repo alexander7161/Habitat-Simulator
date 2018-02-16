@@ -19,13 +19,13 @@ public class Simulator
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 160;
     // The probability that a fox will be created in any given grid position.
-    private static final double FOX_CREATION_PROBABILITY = 0.07;
+    private static final double FOX_CREATION_PROBABILITY = 0.05;
     // The probability that a rabbit will be created in any given grid position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.2;
-    private static final double TIGER_CREATION_PROBABILITY = 0.07;
-    private static final double SQUIRREL_CREATION_PROBABILITY = 0.2;
-    private static final double MOUSE_CREATION_PROBABILITY = 0.2;
-    private static final double PLANT_CREATION_PROBABILITY = 0.9;
+    private static final double RABBIT_CREATION_PROBABILITY = 0.3;
+    private static final double TIGER_CREATION_PROBABILITY = 0.05;
+    private static final double SQUIRREL_CREATION_PROBABILITY = 0.3;
+    private static final double MOUSE_CREATION_PROBABILITY = 0.3;
+    private static final double PLANT_CREATION_PROBABILITY = 0.8;
 
     // List of actors in the field.
     private List<Actor> actors;
@@ -77,6 +77,7 @@ public class Simulator
         view.setColor(Squirrel.class, Color.GREEN);
         view.setColor(Mouse.class, Color.YELLOW);
 
+
         // Setup a valid starting point.
         reset();
     }
@@ -97,7 +98,7 @@ public class Simulator
      */
     public void simulate(int numSteps)
     {
-        for(int step = 1; step <= numSteps && view.isViable(field); incrementStep()) {
+        for(int step = 1; step <= numSteps && view.isViable(field); step++) {
             simulateOneStep();
             // delay(60);   // uncomment this to run more slowly
         }

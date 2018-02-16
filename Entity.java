@@ -82,6 +82,8 @@ public abstract class Entity extends Actor
     {
         return field;
     }
+    
+    
 
     
 

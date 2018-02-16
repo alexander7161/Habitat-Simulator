@@ -193,13 +193,10 @@ public abstract class Animal extends Entity
     
     protected void getDiseaseFinished()
     {
-        if(getDiseased())
+        if(getDiseased() && disease.getDiseaseFinished() && disease.getDiseaseDeath())
         {
-            if(disease.getDiseaseFinished())
-            {
-                setDead();
-                System.out.println("Disease death");
-            }
+                    setDead();
+                    System.out.println("Disease death");
         }
     }
     

@@ -12,9 +12,9 @@ public class Plant extends Entity
 {
     private static final int MAX_AGE = 25;
     private static final Random rand = Randomizer.getRandom();
-    private static final int MAX_LITTER_SIZE = 8;
+    private static final int MAX_LITTER_SIZE = 6;
     private static final int BREEDING_AGE = 5;
-    private static final double BREEDING_PROBABILITY = 0.9;
+    private static final double BREEDING_PROBABILITY = 0.8;
 
     /**
      * Constructor for objects of class Plant
@@ -22,11 +22,9 @@ public class Plant extends Entity
     public Plant(boolean randomAge, Field field, Location location)
     {
         super(field, location);
+        age = 0;
         if(randomAge) {
-            age = rand.nextInt(MAX_AGE);
-        }
-        else {
-            age = 0;
+           age = rand.nextInt(MAX_AGE);
         }
     }
 
@@ -60,17 +58,10 @@ public class Plant extends Entity
         int births = breed();
         for(int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
-            Entity young = getNewAnimal(false, field, loc);
+            Entity young = new Plant(false, field, loc);
             newAnimals.add(young);
         }
         }
-
-    protected Entity getNewAnimal(boolean randomAge, Field field, Location loc)
-    {
-        Entity young;
-        return young = new Plant(false, field, loc);
-    }
-
 
     protected int getMAX_AGE()
     {
