@@ -45,24 +45,25 @@ public class Weather extends Actor
             rain = true;
         }
     }
-    
-    /**
-     * Check whether the animal is alive or not.
-     * @return true if the animal is still alive.
-     */
-    protected boolean isAlive()
+       
+    protected String getWeather()
     {
-        return true;
+        if(fog && rain)
+        {
+            return "Fog & Rain";
+        }
+        else if(fog)
+        {
+            return "Fog";
+        }
+        else if (rain)
+        {
+            return "Rain";
+        }
+        else {
+            return "";
+        }
     }
     
-    public boolean isRaining()
-    {
-        return rain;
-    }
-    
-    public boolean isFog()
-    {
-        return fog;
-    }
 }
 

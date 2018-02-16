@@ -22,33 +22,24 @@ public abstract class Predator extends Animal
         
     }
     
-    
-    
-        /**
-     * Look for rabbits adjacent to the current location.
-     * Only the first live rabbit is eaten.
-     * @return Where food was found, or null if it wasn't.
-     */
-    protected Location findFood()
+    protected boolean getFood(Field field, Location where)
     {
-        Field field = getField();
-        List<Location> adjacent = field.adjacentLocations(getLocation());
-        Iterator<Location> it = adjacent.iterator();
-        while(it.hasNext()) {
-            Location where = it.next();
-            Object animal = field.getObjectAt(where);
-            if(animal instanceof Prey)
+        Object animal = field.getObjectAt(where);
+        if(animal instanceof Prey)
             {
                 Prey prey = (Prey) animal;
                 if(prey.isAlive()) { 
                    prey.setDead();
                    addFoodValue(prey.getFOOD_VALUE());
-                   return where;
+                   return true;
                 }
             }
-        }
-        return null;
+                
+        return false;
+
     }
+    
+        
 
 
     

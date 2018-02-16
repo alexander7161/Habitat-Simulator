@@ -26,25 +26,24 @@ public abstract class Prey extends Animal
     }
 
     
-    /**
- * Look for rabbits adjacent to the current location.
- * Only the first live rabbit is eaten.
- * @return Where food was found, or null if it wasn't.
- */
-protected Location findFood()
-{
-    Field field = getField();
-    Object object = field.getPlantAt(getLocation());
-        if(object instanceof Plant)
-        {
-            Plant plant = (Plant) object;
-            if(plant.isAlive()) {
-               plant.setDead();
-               addFoodValue(plant.getFOOD_VALUE());
-               return getLocation();
+        /**
+       * Look for rabbits adjacent to the current location.
+         * Only the first live rabbit is eaten.
+           * @return Where food was found, or null if it wasn't.
+             */
+            protected boolean getFood(Field field, Location where)
+            {
+            Object object = field.getPlantAt(where);
+                if(object instanceof Plant)
+            {
+                Plant plant = (Plant) object;
+                if(plant.isAlive()) { 
+                   plant.setDead();
+                   addFoodValue(plant.getFOOD_VALUE());
+                   return true;
+                }
             }
-        }
-    return null;
+            return false;
 }
 
 
