@@ -10,10 +10,10 @@ import java.util.Random;
  */
 public class Plant extends Entity
 {
-    private static final int MAX_AGE = 10;
+    private static final int MAX_AGE = 25;
     private static final Random rand = Randomizer.getRandom();
     private static final int MAX_LITTER_SIZE = 8;
-    private static final int BREEDING_AGE = 6;
+    private static final int BREEDING_AGE = 5;
     private static final double BREEDING_PROBABILITY = 0.9;
 
     /**
@@ -35,7 +35,7 @@ public class Plant extends Entity
      * around. Sometimes it will breed or die of old age.
      * @param newRabbits A list to return newly born rabbits.
      */
-    public void act(List<Actor> newActors, int time)
+    public void act(List<Actor> newActors)
     {
         incrementAge();
         if(isAlive()) {
@@ -90,7 +90,7 @@ public class Plant extends Entity
     }
     protected int getFOOD_VALUE()
     {
-    return age;
+    return age+10;
     }
 
 }

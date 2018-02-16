@@ -5,7 +5,7 @@ import java.util.List;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Disease extends Actor
+public class Disease
 {
     private static final int STEPS_BEFORE_DEATH = 4;
     private int counter;
@@ -19,16 +19,12 @@ public class Disease extends Actor
 
     }
 
-    public void act(List<Actor> newActors, int time)
-    {
-        counter++;
-    }
-
     public boolean getDiseaseFinished()
     {
+        counter++;
         if(counter >= STEPS_BEFORE_DEATH)
         {
-            System.out.println("disease done");
+            //System.out.println("disease done");
             return true;
         }
         else {

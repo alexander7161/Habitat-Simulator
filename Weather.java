@@ -32,7 +32,7 @@ public class Weather extends Actor
      * @param  y  a sample parameter for a method
      * @return    the sum of x and y
      */
-    public void act(List<Actor> newActors, int time)
+    public void act(List<Actor> newActors)
     {
         Random rand = Randomizer.getRandom();
         rain= false;

@@ -37,7 +37,7 @@ public abstract class Animal extends Entity
      * @param field The field currently occupied.
      * @param newFoxes A list to return newly born foxes.
      */
-    public void act(List<Actor> newActors, int time)
+    public void act(List<Actor> newActors)
     {
         incrementHealth();
         actMove(newActors);
@@ -79,7 +79,6 @@ public abstract class Animal extends Entity
         if(!getDiseased()) {
             if (rand.nextDouble() <= PROBABILITY_OF_INFECTION_RANDOM ) {
                 disease = new Disease();
-                newActors.add(disease);
                 //System.out.println("random disease");
             }
         }
@@ -109,17 +108,16 @@ public abstract class Animal extends Entity
                 Animal nextAnimal = (Animal) animal;
                 if(nextAnimal!=null && this.getClass().equals(nextAnimal.getClass())) {
                     if (rand.nextDouble() <= PROBABILITY_OF_INFECTION_CONTACT ) {
-                        nextAnimal.giveDisease(newActors);
+                        nextAnimal.giveDisease();
                     }
                 }
             }
         }   
     }      
     
-    protected void giveDisease(List<Actor> newActors)
+    protected void giveDisease()
     {
         this.disease = new Disease();
-        newActors.add(disease);
         //System.out.println("disease spread");
     }
     
@@ -158,6 +156,7 @@ public abstract class Animal extends Entity
                 Location loc = free.remove(0);
                 Animal young = getNewAnimal(false, field, loc);
                 newAnimals.add(young);
+                //System.out.println("Breed" + young.getClass());
             }
             }
         }
@@ -199,8 +198,7 @@ public abstract class Animal extends Entity
             if(disease.getDiseaseFinished())
             {
                 setDead();
-                System.out.println("Disease dead");
-                disease.setDead();
+                System.out.println("Disease death");
             }
         }
     }

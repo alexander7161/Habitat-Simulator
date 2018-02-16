@@ -42,7 +42,7 @@ public abstract class Actor
 * whatever it wants/needs to do.
 * @param newAnimals A list to receive newly born animals.
 */
-abstract public void act(List<Actor> newActors, int time);
+abstract public void act(List<Actor> newActors);
 
 
 

@@ -119,7 +119,7 @@ public class Simulator
 
         for(Iterator<Actor> it = actors.iterator(); it.hasNext(); ) {
             Actor actor = it.next();
-            actor.act(newActors, time);
+            actor.act(newActors);
             
             if(! actor.isAlive()) {
                 it.remove();
