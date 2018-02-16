@@ -33,18 +33,24 @@ public abstract class Prey extends Animal
  */
 protected Location findFood()
 {
-    Field field = getField();
-    Object object = field.getPlantAt(getLocation());
-        if(object instanceof Plant)
-        {
-            Plant plant = (Plant) object;
-            if(plant.isAlive()) {
-               plant.setDead();
-               addFoodValue(plant.getFOOD_VALUE());
-               return getLocation();
+        Field field = getField();
+        List<Location> adjacent = field.adjacentLocations(getLocation());
+        Iterator<Location> it = adjacent.iterator();
+        while(it.hasNext()) {
+            Location where = it.next();
+            Object newObject = field.getPlantAt(where);
+            if(newObject instanceof Plant)
+            {
+                Plant plant = (Plant) newObject;
+                if(plant.isAlive()) { 
+                   //System.out.println("Plant eaten");
+                   plant.setDead();
+                   addFoodValue(plant.getFOOD_VALUE());
+                   return getLocation();
+                }
             }
         }
-    return null;
+        return null;
 }
 
 

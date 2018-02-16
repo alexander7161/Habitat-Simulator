@@ -156,7 +156,6 @@ public class Simulator
         for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {
 
-
                 if(rand.nextDouble() <= PLANT_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Plant plant = new Plant(true, field.getPlantField(), location);
