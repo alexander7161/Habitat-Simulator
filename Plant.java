@@ -8,7 +8,7 @@ import java.util.Random;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Plant extends Entity
+public class Plant extends Actor implements Edible
 {
     private static final int MAX_AGE = 25;
     private static final Random rand = Randomizer.getRandom();
@@ -58,7 +58,7 @@ public class Plant extends Entity
         int births = breed();
         for(int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
-            Entity young = new Plant(false, field, loc);
+            Actor young = new Plant(false, field, loc);
             newAnimals.add(young);
         }
         }
@@ -79,7 +79,7 @@ public class Plant extends Entity
     {
         return BREEDING_PROBABILITY;
     }
-    protected int getFOOD_VALUE()
+    public int getFOOD_VALUE()
     {
     return age+10;
     }

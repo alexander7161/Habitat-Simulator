@@ -71,7 +71,7 @@ public class Rabbit extends Prey
         return BREEDING_AGE;
     }
     
-        protected int getFOOD_VALUE()
+    public int getFOOD_VALUE()
     {
         return FOOD_VALUE;
     }

@@ -8,7 +8,7 @@ import java.util.Random;
  * @author (your name here)
  * @version (version number or date here)
  */
-public abstract class Prey extends Animal
+public abstract class Prey extends Animal implements Edible
 {
     private static final int INITIAL_HUNGER_VALUE = 7;
     private static final Random rand = Randomizer.getRandom();
@@ -25,27 +25,16 @@ public abstract class Prey extends Animal
 
     }
 
-    
-        /**
-       * Look for rabbits adjacent to the current location.
-         * Only the first live rabbit is eaten.
-           * @return Where food was found, or null if it wasn't.
-             */
-            protected boolean getFood(Field field, Location where)
-            {
-            Object object = field.getPlantAt(where);
-                if(object instanceof Plant)
-            {
-                Plant plant = (Plant) object;
-                if(plant.isAlive()) { 
-                   plant.setDead();
-                   addFoodValue(plant.getFOOD_VALUE());
-                   return true;
-                }
-            }
-            return false;
-}
+    protected Edible getEdible(Object animal)
+    {
+      Edible plant = null;
+      if(animal instanceof Plant)
+          {
+              plant = (Plant) animal;
+          }
+          return plant;
+    }
 
 
-    protected abstract int getFOOD_VALUE();
+    public abstract int getFOOD_VALUE();
 }
