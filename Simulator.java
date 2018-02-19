@@ -19,13 +19,13 @@ public class Simulator
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 160;
     // The probability that a fox will be created in any given grid position.
-    private static final double FOX_CREATION_PROBABILITY = 0.05;
+    private static final double FOX_CREATION_PROBABILITY = 0.01;
     // The probability that a rabbit will be created in any given grid position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.3;
-    private static final double TIGER_CREATION_PROBABILITY = 0.05;
-    private static final double SQUIRREL_CREATION_PROBABILITY = 0.3;
-    private static final double MOUSE_CREATION_PROBABILITY = 0.3;
-    private static final double PLANT_CREATION_PROBABILITY = 0.8;
+    private static final double RABBIT_CREATION_PROBABILITY = 0.03;
+    private static final double TIGER_CREATION_PROBABILITY = 0.01;
+    private static final double SQUIRREL_CREATION_PROBABILITY = 0.03;
+    private static final double MOUSE_CREATION_PROBABILITY = 0.03;
+    private static final double PLANT_CREATION_PROBABILITY = 0.98;
 
     // List of actors in the field.
     private List<Actor> actors;

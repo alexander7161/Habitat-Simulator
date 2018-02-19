@@ -12,9 +12,9 @@ public class Plant extends Actor implements Edible
 {
     private static final int MAX_AGE = 25;
     private static final Random rand = Randomizer.getRandom();
-    private static final int MAX_LITTER_SIZE = 6;
-    private static final int BREEDING_AGE = 5;
-    private static final double BREEDING_PROBABILITY = 0.8;
+    private static final int MAX_LITTER_SIZE = 8;
+    private static final int BREEDING_AGE = 0;
+    private static final double BREEDING_PROBABILITY = 0.9;
 
     /**
      * Constructor for objects of class Plant
@@ -83,5 +83,6 @@ public class Plant extends Actor implements Edible
     {
     return age+10;
     }
+    
 
 }

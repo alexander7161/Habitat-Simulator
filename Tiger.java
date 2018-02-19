@@ -10,7 +10,7 @@ import java.util.Random;
 public class Tiger extends Predator
 {
     // Characteristics shared by all Tigers (class variables).
-    
+
     // The age at which a Tiger can start to breed.
     private static final int BREEDING_AGE = 15;
     // The age to which a Tiger can live.
@@ -24,13 +24,13 @@ public class Tiger extends Predator
     private static final int INITIAL_HUNGER_VALUE = 9;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
-    
+
 
 
     /**
      * Create a Tiger. A Tiger can be created as a new born (age zero
      * and not hungry) or with a random age and food level.
-     * 
+     *
      * @param randomAge If true, the Tiger will have random age and hunger level.
      * @param field The field currently occupied.
      * @param location The location within the field.
@@ -47,34 +47,34 @@ public class Tiger extends Predator
             foodLevel =  INITIAL_HUNGER_VALUE ;
         }
     }
-      
+
     protected int getMAX_AGE()
     {
         return MAX_AGE;
     }
-    
+
     protected int getBREEDING_AGE()
     {
         return BREEDING_AGE;
     }
-    
-    
+
+
     protected int getMAX_LITTER_SIZE()
     {
         return MAX_LITTER_SIZE;
     }
-    
+
     protected double getBREEDING_PROBABILITY()
     {
         return BREEDING_PROBABILITY;
     }
-    
+
     protected Animal getNewAnimal(boolean randomAge, Field field, Location loc)
     {
         Animal young;
         return young = new Tiger(false, field, loc);
     }
-    
+
     /**
      * This is what the fox does most of the time: it hunts for
      * rabbits. In the process, it might breed, die of hunger,
@@ -91,9 +91,9 @@ public class Tiger extends Predator
         }
 
     }
-    
+
     protected boolean getDayTime(int time)
-    { 
+    {
         if( (0 <= time) && (time <= 6)) {
             return false;
         }

@@ -227,8 +227,8 @@ public abstract class Animal extends Actor
          */
         protected boolean getFood(Field field, Location where)
         {
-        Object object = field.getPlantAt(where);
-        Edible edible = getEdible(object);
+
+        Edible edible = getEdible(field, where);
             if(edible != null)
         {
             int foodValue = edible.getFOOD_VALUE();
@@ -242,7 +242,7 @@ public abstract class Animal extends Actor
         return false;
 }
 
-protected abstract Edible getEdible(Object object);
+protected abstract Edible getEdible(Field field, Location where);
 
 
 }
