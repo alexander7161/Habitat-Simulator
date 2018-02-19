@@ -38,7 +38,6 @@ public class Simulator
     // A graphical view of the simulation.
     private SimulatorView view;
 
-    private Weather weather;
 
 
     /**
@@ -66,8 +65,6 @@ public class Simulator
         actors = new ArrayList<>();
         field = new Field(depth, width);
         field.createPlantField();
-
-        weather = new Weather();
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
@@ -100,7 +97,7 @@ public class Simulator
     {
         for(int step = 1; step <= numSteps && view.isViable(field); step++) {
             simulateOneStep();
-            // delay(60);   // uncomment this to run more slowly
+            delay(60);   // uncomment this to run more slowly
         }
     }
 
@@ -117,7 +114,7 @@ public class Simulator
         List<Actor> newActors = new ArrayList<>();
         // Let all rabbits act.
 
-
+        Actor.stepWeather();
         for(Iterator<Actor> it = actors.iterator(); it.hasNext(); ) {
             Actor actor = it.next();
             actor.act(newActors);
@@ -130,7 +127,7 @@ public class Simulator
         // Add the newly born foxes and rabbits to the main lists.
         actors.addAll(newActors);
 
-        view.showStatus(step,time, weather.getWeather(), field);
+        view.showStatus(step,time, Actor.getWeather(), field);
     }
 
     /**
@@ -143,7 +140,7 @@ public class Simulator
         populate();
 
         // Show the starting state in the view.
-        view.showStatus(step,time, weather.getWeather(), field);
+        view.showStatus(step,time, Actor.getWeather(), field);
     }
 
     /**
@@ -152,7 +149,6 @@ public class Simulator
     private void populate()
     {
         Random rand = Randomizer.getRandom();
-        actors.add(weather);
         field.clear();
         for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {

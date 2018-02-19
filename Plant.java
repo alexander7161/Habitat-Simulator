@@ -36,7 +36,7 @@ public class Plant extends Entity
     public void act(List<Actor> newActors)
     {
         incrementAge();
-        if(isAlive()) {
+        if(isAlive() && Actor.getRaining()) {
             giveBirth(newActors);
         }
     }

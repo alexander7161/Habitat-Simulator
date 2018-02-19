@@ -12,10 +12,26 @@ public abstract class Actor
 {
     // Whether the animal is alive or not.
     private boolean alive;
+    private static Weather weather = new Weather();
     
     public Actor()
     {
         alive = true;
+    }
+    
+    public static void stepWeather()
+    {
+        weather.step();
+    }
+    
+    public static String getWeather()
+    {
+        return weather.getWeather();
+    }
+    
+    protected static boolean getRaining()
+    {
+        return weather.getRaining();
     }
     
     /**

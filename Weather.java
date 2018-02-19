@@ -7,13 +7,14 @@ import java.util.Iterator;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Weather extends Actor
+public class Weather
 {
     // instance variables - replace the example below with your own
     
     
     private static final double FOG_PROPABILITY = 0.1;
     private static final double RAIN_PROPABILITY = 0.7;
+    private static final Random rand = Randomizer.getRandom();
     
     private boolean rain;
     private boolean fog;
@@ -32,9 +33,8 @@ public class Weather extends Actor
      * @param  y  a sample parameter for a method
      * @return    the sum of x and y
      */
-    public void act(List<Actor> newActors)
+    public void step()
     {
-        Random rand = Randomizer.getRandom();
         rain= false;
         fog = false;
         
@@ -46,7 +46,7 @@ public class Weather extends Actor
         }
     }
        
-    protected String getWeather()
+    public String getWeather()
     {
         if(fog && rain)
         {
@@ -63,6 +63,11 @@ public class Weather extends Actor
         else {
             return "";
         }
+    }
+    
+    public boolean getRaining()
+    {
+        return rain;
     }
     
 }
