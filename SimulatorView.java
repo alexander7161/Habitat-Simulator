@@ -134,6 +134,7 @@ public class SimulatorView extends JFrame
                     fieldView.drawMark(col, row, getColor(animal.getClass()));
                 }
                 else if (plant !=null) {
+                    Plant plantColor = (Plant) plant;
                     fieldView.drawMark(col, row, Color.lightGray);
                 }
                 else {
