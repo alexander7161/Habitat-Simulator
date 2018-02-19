@@ -8,7 +8,7 @@ import java.util.Iterator;
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
  */
-public abstract class Animal extends Entity
+public abstract class Animal extends Actor
 {
     protected int foodLevel;
     private int gender;
@@ -232,10 +232,10 @@ public abstract class Animal extends Entity
             if(edible != null)
         {
             int foodValue = edible.getFOOD_VALUE();
-            Entity animal = (Entity) getEdible(object);
+            Actor animal = (Actor) edible;
             if(animal.isAlive()) {
                animal.setDead();
-               addFoodValue(edible.getFOOD_VALUE());
+               addFoodValue(foodValue);
                return true;
             }
         }
