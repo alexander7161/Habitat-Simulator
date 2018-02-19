@@ -70,7 +70,7 @@ public class Mouse extends Prey
         return BREEDING_PROBABILITY;
     }
     
-    protected int getFOOD_VALUE()
+    public int getFOOD_VALUE()
     {
         return FOOD_VALUE;
  

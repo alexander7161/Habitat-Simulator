@@ -15,32 +15,25 @@ public abstract class Predator extends Animal
     private static final Random rand = Randomizer.getRandom();
 
     /**
-     * 
+     *
      */
     public Predator (Field field, Location location){
         super(field, location);
-        
+
     }
-    
-    protected boolean getFood(Field field, Location where)
+
+    protected Edible getEdible(Object animal)
     {
-        Object animal = field.getObjectAt(where);
-        if(animal instanceof Prey)
-            {
-                Prey prey = (Prey) animal;
-                if(prey.isAlive()) { 
-                   prey.setDead();
-                   addFoodValue(prey.getFOOD_VALUE());
-                   return true;
-                }
-            }
-                
-        return false;
-
+      Edible prey = null;
+      if(animal instanceof Prey)
+          {
+              prey = (Prey) animal;
+          }
+          return prey;
     }
-    
-        
 
 
-    
+
+
+
 }

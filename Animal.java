@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 /**
  * A class representing shared characteristics of animals.
- * 
+ *
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
  */
@@ -12,14 +12,14 @@ public abstract class Animal extends Entity
 {
     protected int foodLevel;
     private int gender;
-    private Random rand = new Random();
+    private static final Random rand = Randomizer.getRandom();
     private Disease disease;
     private static final double PROBABILITY_OF_INFECTION_RANDOM = 0.0001;
     private static final double PROBABILITY_OF_INFECTION_CONTACT = 0.1;
-    
+
     /**
      * Create a new animal at location in field.
-     * 
+     *
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
@@ -27,9 +27,9 @@ public abstract class Animal extends Entity
     {
         super(field, location);
         gender = rand.nextInt(2);
-        
+
     }
-    
+
     /**
      * This is what the fox does most of the time: it hunts for
      * rabbits. In the process, it might breed, die of hunger,
@@ -42,24 +42,24 @@ public abstract class Animal extends Entity
         incrementHealth();
         actMove(newActors);
     }
-    
+
     protected void incrementHealth()
     {
         incrementAge();
         incrementHunger();
         getDiseaseFinished();
     }
-    
+
     protected void actMove(List<Actor> newActors)
     {
         if(isAlive()) {
-                giveBirth(newActors); 
-                
+                giveBirth(newActors);
+
                 randomDisease(newActors);
                 spreadDisease(newActors);
                 // Move towards a source of food if found.
                 Location newLocation = findFood();
-                if(newLocation == null) { 
+                if(newLocation == null) {
                     // No food found - try to move to a free location.
                     newLocation = getField().freeAdjacentLocation(getLocation());
                 }
@@ -73,7 +73,7 @@ public abstract class Animal extends Entity
                 }
             }
     }
-    
+
     protected void randomDisease(List<Actor> newActors)
     {
         if(!getDiseased()) {
@@ -82,8 +82,8 @@ public abstract class Animal extends Entity
                 //System.out.println("random disease");
             }
         }
-    }  
-    
+    }
+
     protected boolean getDiseased()
     {
         if(disease!=null)
@@ -95,7 +95,7 @@ public abstract class Animal extends Entity
             return false;
         }
     }
-    
+
     protected void spreadDisease(List<Actor> newActors)
     {
         if(getDiseased()) {
@@ -112,23 +112,23 @@ public abstract class Animal extends Entity
                     }
                 }
             }
-        }   
-    }      
-    
+        }
+    }
+
     protected void giveDisease()
     {
         this.disease = new Disease();
         //System.out.println("disease spread");
     }
-    
+
     protected abstract int getBREEDING_AGE();
-    
+
     protected abstract double getBREEDING_PROBABILITY();
     protected abstract int getMAX_LITTER_SIZE();
 
-    
+
     protected abstract Animal getNewAnimal(boolean randomAge, Field field, Location location);
-    
+
     /**
      * Check whether or not this fox is to give birth at this step.
      * New births will be made into free adjacent locations.
@@ -138,7 +138,7 @@ public abstract class Animal extends Entity
     {
         // New foxes are born into adjacent locations.
         // Get a list of adjacent free locations.
-        
+
         Field field = getField();
         List<Location> adjacent = field.adjacentLocations(getLocation());
         Iterator<Location> it = adjacent.iterator();
@@ -147,7 +147,7 @@ public abstract class Animal extends Entity
             Object animal = field.getObjectAt(where);
             Animal nextAnimal = (Animal) animal;
             if(nextAnimal!=null && this.getClass().equals(nextAnimal.getClass())) {
-            
+
             if((this.getMale() && !nextAnimal.getMale()) || (!this.getMale() && nextAnimal.getMale()))
             {
                 List<Location> free = field.getFreeAdjacentLocations(getLocation());
@@ -161,9 +161,9 @@ public abstract class Animal extends Entity
             }
         }
         }
-        
+
     }
-    
+
     private boolean getMale()
     {
         if(gender==1)
@@ -174,7 +174,7 @@ public abstract class Animal extends Entity
             return false;
         }
     }
-    
+
     /**
      * Make this fox more hungry. This could result in the fox's death.
      */
@@ -185,12 +185,12 @@ public abstract class Animal extends Entity
             setDead();
         }
     }
-    
+
     protected void addFoodValue(int foodValue)
     {
         foodLevel += foodValue;
     }
-    
+
     protected void getDiseaseFinished()
     {
         if(getDiseased() && disease.getDiseaseFinished() && disease.getDiseaseDeath())
@@ -199,7 +199,7 @@ public abstract class Animal extends Entity
                     System.out.println("Disease death");
         }
     }
-    
+
     /**
      * Look for rabbits adjacent to the current location.
      * Only the first live rabbit is eaten.
@@ -219,6 +219,30 @@ public abstract class Animal extends Entity
         }
         return null;
     }
-    
-    abstract protected boolean getFood(Field field, Location where);
+
+    /**
+   * Look for rabbits adjacent to the current location.
+     * Only the first live rabbit is eaten.
+       * @return Where food was found, or null if it wasn't.
+         */
+        protected boolean getFood(Field field, Location where)
+        {
+        Object object = field.getPlantAt(where);
+        Edible edible = getEdible(object);
+            if(edible != null)
+        {
+            int foodValue = edible.getFOOD_VALUE();
+            Entity animal = (Entity) getEdible(object);
+            if(animal.isAlive()) {
+               animal.setDead();
+               addFoodValue(edible.getFOOD_VALUE());
+               return true;
+            }
+        }
+        return false;
+}
+
+protected abstract Edible getEdible(Object object);
+
+
 }
