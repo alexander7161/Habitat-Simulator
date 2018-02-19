@@ -22,8 +22,9 @@ public abstract class Predator extends Animal
 
     }
 
-    protected Edible getEdible(Object animal)
+    protected Edible getEdible(Field field, Location where)
     {
+      Object animal = field.getObjectAt(where);
       Edible prey = null;
       if(animal instanceof Prey)
           {

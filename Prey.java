@@ -10,7 +10,7 @@ import java.util.Random;
  */
 public abstract class Prey extends Animal implements Edible
 {
-    private static final int INITIAL_HUNGER_VALUE = 7;
+    private static final int INITIAL_HUNGER_VALUE = 6;
     private static final Random rand = Randomizer.getRandom();
 
 
@@ -24,9 +24,11 @@ public abstract class Prey extends Animal implements Edible
 
 
     }
+    
 
-    protected Edible getEdible(Object animal)
+    protected Edible getEdible(Field field, Location where)
     {
+      Object animal = field.getPlantAt(where);
       Edible plant = null;
       if(animal instanceof Plant)
           {
