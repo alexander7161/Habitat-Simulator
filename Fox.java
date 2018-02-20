@@ -18,12 +18,12 @@ public class Fox extends Predator
     // The age to which a fox can live.
     private static final int MAX_AGE = 150;
     // The likelihood of a fox breeding.
-    private static final double BREEDING_PROBABILITY = 0.8;
+    private static final double BREEDING_PROBABILITY = 0.4;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 2;
     // The food value of a single rabbit. In effect, this is the
     // number of steps a fox can go before it has to eat again.
-    private static final int INITIAL_HUNGER_VALUE = 7;
+    private static final int INITIAL_HUNGER_VALUE = 13;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
 
@@ -76,8 +76,9 @@ public class Fox extends Predator
         return BREEDING_PROBABILITY;
     }
     
-    protected Edible getEdible(Object animal)
+    protected Edible getEdible(Field field, Location where)
     {
+      Object animal = field.getObjectAt(where);
       Edible prey = null;
       if(animal instanceof Rabbit)
           {
@@ -94,7 +95,7 @@ public class Fox extends Predator
         }
         else
         {
-            return false;
+            return true;
         }
     }
 
