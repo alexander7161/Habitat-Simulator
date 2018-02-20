@@ -124,18 +124,9 @@ public class SimulatorView extends JFrame
             for(int col = 0; col < field.getWidth(); col++) {
                 Object animal = field.getObjectAt(row, col);
                 Object plant = field.getPlantAt(row, col);
-                if(animal != null && plant != null)
-                {
-                    stats.incrementCount(animal.getClass());
-                    fieldView.drawMark(col, row, getColor(animal.getClass()).darker());
-                }
-                else if(animal != null) {
+                if(animal != null) {
                     stats.incrementCount(animal.getClass());
                     fieldView.drawMark(col, row, getColor(animal.getClass()));
-                }
-                else if (plant !=null) {
-                    Plant plantColor = (Plant) plant;
-                    fieldView.drawMark(col, row, Color.lightGray);
                 }
                 else {
                     fieldView.drawMark(col, row, EMPTY_COLOR);
@@ -147,6 +138,7 @@ public class SimulatorView extends JFrame
         population.setText(POPULATION_PREFIX + stats.getPopulationDetails(field));
         fieldView.repaint();
     }
+    
 
     /**
      * Determine whether the simulation should continue to run.

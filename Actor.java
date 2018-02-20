@@ -14,7 +14,7 @@ public abstract class Actor
     private boolean alive;
     // Whether the animal is alive or not.
     protected int age;
-    private static Weather weather = new Weather();
+    
     // The animal's field.
     private Field field;
     // The animal's position in the field.
@@ -31,24 +31,7 @@ public abstract class Actor
     
     protected abstract int getMAX_AGE();
     
-    public static void stepWeather()
-    {
-        weather.step();
-    }
     
-    public static String getWeather()
-    {
-        return weather.getWeather();
-    }
-    
-    protected abstract double getBREEDING_PROBABILITY();
-    protected abstract int getBREEDING_AGE();
-    protected abstract int getMAX_LITTER_SIZE();
-    
-    protected static boolean getRaining()
-    {
-        return weather.getRaining();
-    }
     
     /**
      * Check whether the animal is alive or not.
@@ -121,24 +104,7 @@ abstract public void act(List<Actor> newActors);
         }
     }
     
-    /**
-     * Generate a number representing the number of births,
-     * if it can breed.
-     * @return The number of births (may be zero).
-     */
-    protected int breed()
-    {
-        int births = 0;
-        if(canBreedAge() && rand.nextDouble() <= getBREEDING_PROBABILITY()) {
-            births = rand.nextInt(getMAX_LITTER_SIZE()) + 1;
-        }
-        return births;
-    }
     
-    protected boolean canBreedAge()
-    {
-        return age >= getBREEDING_AGE();
-    }
 
 
     

@@ -29,6 +29,10 @@ public abstract class Animal extends Actor
         gender = rand.nextInt(2);
 
     }
+    
+    protected abstract double getBREEDING_PROBABILITY();
+    protected abstract int getBREEDING_AGE();
+    protected abstract int getMAX_LITTER_SIZE();
 
     /**
      * This is what the fox does most of the time: it hunts for
@@ -52,17 +56,13 @@ public abstract class Animal extends Actor
 
     protected void actMove(List<Actor> newActors)
     {
-        if(isAlive() && isNotAsleep(Simulator.getTime())) {
+        if(isAlive() && isNotAsleep(Simulator.getTime()) && isFogImmune()) {
                 giveBirth(newActors);
 
                 randomDisease();
                 spreadDisease();
-                // Move towards a source of food if found.
-                Location newLocation = findFood();
-                if(newLocation == null) {
-                    // No food found - try to move to a free location.
-                    newLocation = getField().freeAdjacentLocation(getLocation());
-                }
+                
+                Location newLocation = getNextLocation();
                 // See if it was possible to move.
                 if(newLocation != null) {
                     setLocation(newLocation);
@@ -73,6 +73,17 @@ public abstract class Animal extends Actor
                 }
             }
     }
+    
+    protected Location getNextLocation()
+    {
+        // Move towards a source of food if found.
+                Location newLocation = findFood();
+                if(newLocation == null) {
+                    // No food found - try to move to a free location.
+                    newLocation = getField().freeAdjacentLocation(getLocation());
+                }
+                return newLocation;
+            }
 
     protected void randomDisease()
     {
@@ -121,10 +132,25 @@ public abstract class Animal extends Actor
         //System.out.println("disease spread");
     }
 
-    protected abstract int getBREEDING_AGE();
-
-    protected abstract double getBREEDING_PROBABILITY();
-    protected abstract int getMAX_LITTER_SIZE();
+    
+    /**
+     * Generate a number representing the number of births,
+     * if it can breed.
+     * @return The number of births (may be zero).
+     */
+    protected int breed()
+    {
+        int births = 0;
+        if(canBreedAge() && rand.nextDouble() <= getBREEDING_PROBABILITY()) {
+            births = rand.nextInt(getMAX_LITTER_SIZE()) + 1;
+        }
+        return births;
+    }
+    
+    protected boolean canBreedAge()
+    {
+        return age >= getBREEDING_AGE();
+    }
 
 
     protected abstract Animal getNewAnimal(boolean randomAge, Field field, Location location);
@@ -245,6 +271,11 @@ public abstract class Animal extends Actor
         protected abstract Edible getEdible(Field field, Location where);
         
         protected boolean isNotAsleep(int time)
+        {
+            return true;
+        }
+        
+        protected boolean isFogImmune()
         {
             return true;
         }
