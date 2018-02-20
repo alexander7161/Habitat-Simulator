@@ -127,7 +127,7 @@ public class Simulator
         // Add the newly born foxes and rabbits to the main lists.
         actors.addAll(newActors);
 
-        view.showStatus(step,time, getWeather(), field);
+        view.showStatus(step,time, weather.getWeatherString(), field);
     }
 
     /**
@@ -140,7 +140,7 @@ public class Simulator
         populate();
 
         // Show the starting state in the view.
-        view.showStatus(step,time, getWeather(), field);
+        view.showStatus(step,time, weather.getWeatherString(), field);
     }
 
     /**
@@ -222,9 +222,9 @@ public class Simulator
     }
     
     
-    public static String getWeather()
+    public static Weather getWeather()
     {
-        return weather.getWeather();
+        return weather;
     }
     
 }

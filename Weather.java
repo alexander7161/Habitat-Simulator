@@ -46,7 +46,7 @@ public class Weather
         }
     }
        
-    public String getWeather()
+    public String getWeatherString()
     {
         if(fog && rain)
         {

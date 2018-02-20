@@ -33,7 +33,7 @@ public class Plant extends Actor implements Edible
      */
     public void act(List<Actor> newActors)
     {
-        if(Simulator.getWeather().toLowerCase().contains("Rain")) {
+        if(Simulator.getWeather().getRaining()) {
             incrementAge();
         }
     }

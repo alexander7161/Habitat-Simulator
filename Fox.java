@@ -89,7 +89,7 @@ public class Fox extends Predator
     
     protected boolean isFogImmune()
     {
-        if(Simulator.getWeather().toLowerCase().contains("fog"))
+        if(Simulator.getWeather().getFog())
         {
             return false;
         }
