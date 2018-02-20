@@ -52,7 +52,7 @@ public abstract class Animal extends Actor
 
     protected void actMove(List<Actor> newActors)
     {
-        if(isAlive()) {
+        if(isAlive() && isNotAsleep(Simulator.getTime())) {
                 giveBirth(newActors);
 
                 randomDisease(newActors);
@@ -242,7 +242,13 @@ public abstract class Animal extends Actor
         return false;
 }
 
-protected abstract Edible getEdible(Field field, Location where);
+        protected abstract Edible getEdible(Field field, Location where);
+        
+        protected boolean isNotAsleep(int time)
+        {
+            return true;
+        }
+    
 
 
 }

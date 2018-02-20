@@ -34,7 +34,7 @@ public class Simulator
     // The current step of the simulation. Each step represents 1 hour.
     private int step;
     //the current time of the day in hours.
-    private int time;
+    private static int time;
     // A graphical view of the simulation.
     private SimulatorView view;
 
@@ -213,5 +213,10 @@ public class Simulator
     {
         step++;
         time = step%24;
+    }
+    
+    public static int getTime()
+    {
+        return time;
     }
 }
