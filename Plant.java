@@ -14,7 +14,7 @@ public class Plant extends Actor implements Edible
     private static final Random rand = Randomizer.getRandom();
     private static final int MAX_LITTER_SIZE = 8;
     private static final int BREEDING_AGE = 0;
-    private static final double BREEDING_PROBABILITY = 0.9;
+    private static final double BREEDING_PROBABILITY = 0.99;
 
     /**
      * Constructor for objects of class Plant
