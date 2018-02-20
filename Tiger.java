@@ -21,7 +21,7 @@ public class Tiger extends Predator
     private static final int MAX_LITTER_SIZE = 2;
     // The food value of a single rabbit. In effect, this is the
     // number of steps a Tiger can go before it has to eat again.
-    private static final int INITIAL_HUNGER_VALUE = 9;
+    private static final int INITIAL_HUNGER_VALUE = 13;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
 
@@ -75,24 +75,7 @@ public class Tiger extends Predator
         return young = new Tiger(false, field, loc);
     }
 
-    /**
-     * This is what the fox does most of the time: it hunts for
-     * rabbits. In the process, it might breed, die of hunger,
-     * or die of old age.
-     * @param field The field currently occupied.
-     * @param newFoxes A list to return newly born foxes.
-     */
-    public void act(List<Actor> newActors, int time)
-    {
-        incrementHealth();
-        if(getDayTime(time))
-        {
-            actMove(newActors);
-        }
-
-    }
-
-    protected boolean getDayTime(int time)
+    protected boolean isNotAsleep(int time)
     {
         if( (0 <= time) && (time <= 6)) {
             return false;
