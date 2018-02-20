@@ -85,6 +85,18 @@ public class Fox extends Predator
           }
           return prey;
     }
+    
+    protected boolean isFogImmune()
+    {
+        if(Simulator.getWeather().toLowerCase().contains("fog"))
+        {
+            return false;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
 
 }

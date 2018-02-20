@@ -70,5 +70,10 @@ public class Weather
         return rain;
     }
     
+    public boolean getFog()
+    {
+        return fog;
+    }
+    
 }
 

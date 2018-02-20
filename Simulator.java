@@ -19,14 +19,15 @@ public class Simulator
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 160;
     // The probability that a fox will be created in any given grid position.
-    private static final double FOX_CREATION_PROBABILITY = 0.01;
+    private static final double FOX_CREATION_PROBABILITY = 0.05;
     // The probability that a rabbit will be created in any given grid position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.03;
-    private static final double TIGER_CREATION_PROBABILITY = 0.01;
-    private static final double SQUIRREL_CREATION_PROBABILITY = 0.03;
-    private static final double MOUSE_CREATION_PROBABILITY = 0.03;
-    private static final double PLANT_CREATION_PROBABILITY = 0.98;
+    private static final double RABBIT_CREATION_PROBABILITY = 0.1;
+    private static final double TIGER_CREATION_PROBABILITY = 0.05;
+    private static final double SQUIRREL_CREATION_PROBABILITY = 0.1;
+    private static final double MOUSE_CREATION_PROBABILITY = 0.1;
 
+    private static Weather weather = new Weather();
+    
     // List of actors in the field.
     private List<Actor> actors;
     // The current state of the field.
@@ -113,8 +114,7 @@ public class Simulator
         // Provide space for newborn actors.
         List<Actor> newActors = new ArrayList<>();
         // Let all rabbits act.
-
-        Actor.stepWeather();
+        
         for(Iterator<Actor> it = actors.iterator(); it.hasNext(); ) {
             Actor actor = it.next();
             actor.act(newActors);
@@ -127,7 +127,7 @@ public class Simulator
         // Add the newly born foxes and rabbits to the main lists.
         actors.addAll(newActors);
 
-        view.showStatus(step,time, Actor.getWeather(), field);
+        view.showStatus(step,time, getWeather(), field);
     }
 
     /**
@@ -140,7 +140,7 @@ public class Simulator
         populate();
 
         // Show the starting state in the view.
-        view.showStatus(step,time, Actor.getWeather(), field);
+        view.showStatus(step,time, getWeather(), field);
     }
 
     /**
@@ -153,12 +153,7 @@ public class Simulator
         for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {
 
-
-                if(rand.nextDouble() <= PLANT_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
-                    Plant plant = new Plant(true, field.getPlantField(), location);
-                    actors.add(plant);
-                }
+                
 
                 if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
@@ -186,6 +181,11 @@ public class Simulator
                     actors.add(mouse);
                 }
                 // else leave the location empty.
+                
+                //Create plant for corresponding plantField location.
+                Location location = new Location(row, col);
+                Plant plant = new Plant(true, field.getPlantField(), location);
+                actors.add(plant);
             }
         }
     }
@@ -213,10 +213,18 @@ public class Simulator
     {
         step++;
         time = step%24;
+        weather.step();
     }
     
     public static int getTime()
     {
         return time;
     }
+    
+    
+    public static String getWeather()
+    {
+        return weather.getWeather();
+    }
+    
 }

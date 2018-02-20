@@ -10,7 +10,7 @@ import java.util.Random;
  */
 public abstract class Prey extends Animal implements Edible
 {
-    private static final int INITIAL_HUNGER_VALUE = 6;
+    private static final int INITIAL_HUNGER_VALUE = 8;
     private static final Random rand = Randomizer.getRandom();
 
 
@@ -23,6 +23,12 @@ public abstract class Prey extends Animal implements Edible
 
 
 
+    }
+    
+    protected Location getNextLocation()
+    {
+                Location newLocation = getField().freeAdjacentLocation(getLocation());
+                return newLocation;
     }
     
 
