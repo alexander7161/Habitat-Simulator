@@ -42,7 +42,7 @@ public class Disease
             return true;
         }
         else {
-            System.out.println("disease survive");
+            //System.out.println("disease survive");
             return false;
         }
     }

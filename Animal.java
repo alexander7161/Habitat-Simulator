@@ -55,8 +55,8 @@ public abstract class Animal extends Actor
         if(isAlive() && isNotAsleep(Simulator.getTime())) {
                 giveBirth(newActors);
 
-                randomDisease(newActors);
-                spreadDisease(newActors);
+                randomDisease();
+                spreadDisease();
                 // Move towards a source of food if found.
                 Location newLocation = findFood();
                 if(newLocation == null) {
@@ -74,7 +74,7 @@ public abstract class Animal extends Actor
             }
     }
 
-    protected void randomDisease(List<Actor> newActors)
+    protected void randomDisease()
     {
         if(!getDiseased()) {
             if (rand.nextDouble() <= PROBABILITY_OF_INFECTION_RANDOM ) {
@@ -96,7 +96,7 @@ public abstract class Animal extends Actor
         }
     }
 
-    protected void spreadDisease(List<Actor> newActors)
+    protected void spreadDisease()
     {
         if(getDiseased()) {
             Field field = getField();
@@ -196,7 +196,7 @@ public abstract class Animal extends Actor
         if(getDiseased() && disease.getDiseaseFinished() && disease.getDiseaseDeath())
         {
                     setDead();
-                    System.out.println("Disease death");
+                    //System.out.println("Disease death");
         }
     }
 
