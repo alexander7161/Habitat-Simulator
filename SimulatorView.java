@@ -26,7 +26,7 @@ public class SimulatorView extends JFrame
     private final String TIME_PREFIX = "Time: ";
     private final String WEATHER_PREFIX = "Weather: ";
     private final String POPULATION_PREFIX = "Population: ";
-    private JLabel stepLabel,timeLabel,weatherLabel, population, infoLabel;
+    private JLabel stepLabel,timeLabel,weatherLabel, population;
     private FieldView fieldView;
     
     // A map for storing colors for participants in the simulation
@@ -48,7 +48,6 @@ public class SimulatorView extends JFrame
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
         timeLabel = new JLabel(TIME_PREFIX, JLabel.CENTER);
         weatherLabel = new JLabel(WEATHER_PREFIX, JLabel.CENTER);
-        infoLabel = new JLabel("  ", JLabel.CENTER);
         population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
         
         setLocation(100, 50);
@@ -58,10 +57,12 @@ public class SimulatorView extends JFrame
         Container contents = getContentPane();
         
         JPanel infoPane = new JPanel(new BorderLayout());
+        JPanel weatherPane = new JPanel(new FlowLayout());
+        weatherPane.add(weatherLabel);
+
             infoPane.add(stepLabel, BorderLayout.WEST);
             infoPane.add(timeLabel, BorderLayout.EAST);
-            infoPane.add(infoLabel, BorderLayout.CENTER);
-            infoPane.add(weatherLabel, BorderLayout.CENTER);
+            infoPane.add(weatherPane, BorderLayout.CENTER);
         contents.add(infoPane, BorderLayout.NORTH);
         contents.add(fieldView, BorderLayout.CENTER);
         contents.add(population, BorderLayout.SOUTH);
@@ -77,14 +78,6 @@ public class SimulatorView extends JFrame
     public void setColor(Class animalClass, Color color)
     {
         colors.put(animalClass, color);
-    }
-
-    /**
-     * Display a short information label at the top of the window.
-     */
-    public void setInfoText(String text)
-    {
-        infoLabel.setText(text);
     }
 
     /**
