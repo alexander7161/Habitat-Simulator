@@ -13,7 +13,7 @@ public class Squirrel extends Prey
     // Characteristics shared by all squirrels (class variables).
 
     // The age at which a squirrel can start to breed.
-    private static final int BREEDING_AGE = 3;
+    private static final int BREEDING_AGE = 6;
     // The age to which a squirrel can live.
     private static final int MAX_AGE = 40;
     // The likelihood of a squirrel breeding.
