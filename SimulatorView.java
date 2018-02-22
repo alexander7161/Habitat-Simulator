@@ -49,11 +49,6 @@ public class SimulatorView extends JFrame
         
         openFile();
         
-        if(currentImage==null)
-        {
-            
-        }
-        
         stats = new FieldStats();
         colors = new LinkedHashMap<>();
 
@@ -99,6 +94,11 @@ public class SimulatorView extends JFrame
         if(currentImage == null) {   // image file was not a valid image
             return;
         }
+    }
+    
+    public OFImage getImage()
+    {
+        return currentImage;
     }
     
     /**
