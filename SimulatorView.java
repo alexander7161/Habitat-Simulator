@@ -3,6 +3,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.io.File;
 
 /**
  * A graphical view of the simulation grid.
@@ -33,6 +34,9 @@ public class SimulatorView extends JFrame
     private Map<Class, Color> colors;
     // A statistics object computing and storing simulation information
     private FieldStats stats;
+    
+    private static JFileChooser fileChooser = new JFileChooser(System.getProperty("user.dir"));
+    private OFImage currentImage;
 
     /**
      * Create a view of the given width and height.
@@ -41,6 +45,15 @@ public class SimulatorView extends JFrame
      */
     public SimulatorView(int height, int width)
     {
+        currentImage = null;
+        
+        openFile();
+        
+        if(currentImage==null)
+        {
+            
+        }
+        
         stats = new FieldStats();
         colors = new LinkedHashMap<>();
 
@@ -68,6 +81,24 @@ public class SimulatorView extends JFrame
         contents.add(population, BorderLayout.SOUTH);
         pack();
         setVisible(true);
+    }
+    
+    /**
+     * Open function: open a file chooser to select a new image file.
+     */
+    private void openFile()
+    {
+        int returnVal = fileChooser.showOpenDialog(this);
+
+        if(returnVal != JFileChooser.APPROVE_OPTION) {
+            return;  // cancelled
+        }
+        File selectedFile = fileChooser.getSelectedFile();
+        currentImage = ImageFileManager.loadImage(selectedFile);
+
+        if(currentImage == null) {   // image file was not a valid image
+            return;
+        }
     }
     
     /**
