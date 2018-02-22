@@ -24,8 +24,9 @@ public class SimulatorView extends JFrame
 
     private final String STEP_PREFIX = "Step: ";
     private final String TIME_PREFIX = "Time: ";
+    private final String WEATHER_PREFIX = "Weather: ";
     private final String POPULATION_PREFIX = "Population: ";
-    private JLabel stepLabel,timeLabel, population, infoLabel;
+    private JLabel stepLabel,timeLabel,weatherLabel, population;
     private FieldView fieldView;
     
     // A map for storing colors for participants in the simulation
@@ -46,7 +47,7 @@ public class SimulatorView extends JFrame
         setTitle("Animal Simulation");
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
         timeLabel = new JLabel(TIME_PREFIX, JLabel.CENTER);
-        infoLabel = new JLabel("  ", JLabel.CENTER);
+        weatherLabel = new JLabel(WEATHER_PREFIX, JLabel.CENTER);
         population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
         
         setLocation(100, 50);
@@ -56,9 +57,12 @@ public class SimulatorView extends JFrame
         Container contents = getContentPane();
         
         JPanel infoPane = new JPanel(new BorderLayout());
+        JPanel weatherPane = new JPanel(new FlowLayout());
+        weatherPane.add(weatherLabel);
+
             infoPane.add(stepLabel, BorderLayout.WEST);
             infoPane.add(timeLabel, BorderLayout.EAST);
-            infoPane.add(infoLabel, BorderLayout.CENTER);
+            infoPane.add(weatherPane, BorderLayout.CENTER);
         contents.add(infoPane, BorderLayout.NORTH);
         contents.add(fieldView, BorderLayout.CENTER);
         contents.add(population, BorderLayout.SOUTH);
@@ -74,14 +78,6 @@ public class SimulatorView extends JFrame
     public void setColor(Class animalClass, Color color)
     {
         colors.put(animalClass, color);
-    }
-
-    /**
-     * Display a short information label at the top of the window.
-     */
-    public void setInfoText(String text)
-    {
-        infoLabel.setText(text);
     }
 
     /**
@@ -104,7 +100,7 @@ public class SimulatorView extends JFrame
      * @param step Which iteration step it is.
      * @param field The field whose status is to be displayed.
      */
-    public void showStatus(int step,int time, Field field)
+    public void showStatus(int step,int time, String weather, Field field)
     {
         if(!isVisible()) {
             setVisible(true);
@@ -112,6 +108,7 @@ public class SimulatorView extends JFrame
             
         stepLabel.setText(STEP_PREFIX + step);
         timeLabel.setText(TIME_PREFIX + time + ":00");
+        weatherLabel.setText(WEATHER_PREFIX + weather);
         stats.reset();
         
         fieldView.preparePaint();
@@ -119,6 +116,7 @@ public class SimulatorView extends JFrame
         for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {
                 Object animal = field.getObjectAt(row, col);
+                Object plant = field.getPlantAt(row, col);
                 if(animal != null) {
                     stats.incrementCount(animal.getClass());
                     fieldView.drawMark(col, row, getColor(animal.getClass()));
@@ -133,6 +131,7 @@ public class SimulatorView extends JFrame
         population.setText(POPULATION_PREFIX + stats.getPopulationDetails(field));
         fieldView.repaint();
     }
+    
 
     /**
      * Determine whether the simulation should continue to run.
